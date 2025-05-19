@@ -1,0 +1,3989 @@
+code_name,problem
+RIOT_COAP,"I need to develop RIOT code on an ESP32, which  sends a CoAP request to an COAP server. The program is configured to send CoAP POST requests ""Hello, COAP Cloud"" to the COAP server at IP address ""47.102.103.1"" and port 5683, with the URI path ""/coap/test"". "
+RIOT_RTC,"I need to develop RIOT code on an ESP32 to achieve RTC alarms. It sets the date to June 1, 2024, and triggers an alarm after 5 seconds, printing ""Alarm triggered!"" upon activation."
+RIOT_IRQ,"I need to develop RIOT code on an ESP32 to achieve interrupt handling. The program uses atomic variables to verify if disabling and restoring interrupts works correctly. You should use irq but not use gpio interface. "
+RIOT_Flash,"I need to develop RIOT code on an ESP32 that uses Non-Volatile Storage (NVS) to store a temperature value persistently. The program initializes NVS, opens a handle to the storage, writes the state value (1 in this case) to NVS, and commits the changes. This process repeats every second, ensuring the temperature is continuously updated in storage."
+RIOT_MBOX,"I need to develop RIOT code on an ESP32 to achieve message box functionality. The program sets up a message box, sending events at intervals."
+RIOT_MQTT,I need to develop a RIOT program for the ESP32 that connects to an MQTT broker at 47.102.103.1:1883 to publish state (”work or not work”) each five seconds. Do not use emcute lib.
+RIOT_MQTT_SN,"I need to develop a RIOT program for the ESP32 that connects to an MQTT-SN broker at 47.102.103.1:1883 to publish state (”work or not work”) every five seconds. To reduce energy, you must use emcute lib."
+RIOT_Event,I need to develop RIOT code on an ESP32. It initializes and starts a event_periodic callback function every second.
+RIOT_UDP,I need to develop a RIOT program for the ESP32 that connects to a UDP server at `47.102.103.1:20001` to send device state (”work or not work”) by UDP method every five seconds.
+RIOT_Thread,"I need to develop RIOT code on an ESP32, where one thread sends messages to another with different priorities. We also need to achieve inter-thread communication using msg_t."
+RIOT_Flash,"I need to develop RIOT code on an ESP32 that uses Non-Volatile Storage (NVS) to store a device state (”1” or “0”) persistently. This process repeats every second, ensuring the temperature is continuously updated in storage."
+RIOT_MMA,I need to develop RIOT code on an ESP32. It read MMA8x5x every 5 seconds.
+RIOT_Timer,I need to develop RIOT code on an ESP32. It sets up a timer that triggers every second and turn on led.
+RIOT_Sched,I need to develop RIOT code on an ESP32. It starts two threads and change priority at runtime.
+RIOT_DHT11,I need to develop RIOT code on an ESP32. It read dht11 each five seconds. The dht11 connects to gpio 2.
+RIOT_Warn,I need to develop RIOT code on an ESP32. It reads the DHT11 every 5 seconds and turns on an LED warning when the temperature exceeds a threshold.
+Zephyr_COAP,"I need to develop Zephyr code on an ESP32, which  sends a CoAP request to an COAP server. The program is configured to send CoAP POST requests ""Hello, COAP Cloud"" to the COAP server at IP address ""47.102.103.1"" and port 5683, with the URI path ""/coap/test"". "
+Zephyr_RTC,"I need to develop Zephyr code on an ESP32 to achieve RTC alarms. It sets the date to June 1, 2024, and triggers an alarm after 5 seconds, printing ""Alarm triggered!"" upon activation."
+Zephyr_IRQ,"I need to develop Zephyr code on an ESP32 to achieve interrupt handling. The program uses atomic variables to verify if disabling and restoring interrupts works correctly. You should use irq but not use gpio interface. "
+Zephyr_Flash,"I need to develop Zephyr code on an ESP32 that uses Non-Volatile Storage (NVS) to store a temperature value persistently. The program initializes NVS, opens a handle to the storage, writes the state value (1 in this case) to NVS, and commits the changes. This process repeats every second, ensuring the temperature is continuously updated in storage."
+Zephyr_MBOX,"I need to develop Zephyr code on an ESP32 to achieve message box functionality. The program sets up a message box, sending events at intervals."
+Zephyr_MQTT,I need to develop a Zephyr program for the ESP32 that connects to an MQTT broker at 47.102.103.1:1883 to publish state (”work or not work”) each five seconds. Do not use emcute lib.
+Zephyr_MQTT_SN,"I need to develop a Zephyr program for the ESP32 that connects to an MQTT-SN broker at 47.102.103.1:1883 to publish state (”work or not work”) every five seconds. To reduce energy, you must use emcute lib."
+Zephyr_Event,I need to develop Zephyr code on an ESP32. It initializes and starts a event_periodic callback function every second.
+Zephyr_UDP,I need to develop a Zephyr program for the ESP32 that connects to a UDP server at `47.102.103.1:20001` to send device state (”work or not work”) by UDP method every five seconds.
+Zephyr_Thread,"I need to develop Zephyr code on an ESP32, where one thread sends messages to another with different priorities. We also need to achieve inter-thread communication using msg_t."
+Zephyr_Flash,"I need to develop Zephyr code on an ESP32 that uses Non-Volatile Storage (NVS) to store a device state (”1” or “0”) persistently. This process repeats every second, ensuring the temperature is continuously updated in storage."
+Zephyr_MMA,"I need to develop Zephyr code on an ESP32. It read MMA8x5x every 5 seconds and uses NVS to store the reading value persistently. "
+Zephyr_Timer,I need to develop Zephyr code on an ESP32. It sets up a timer that triggers every second and turn on led.
+Zephyr_Sched,I need to develop Zephyr code on an ESP32. It starts two threads and change priority at runtime.
+Zephyr_DHT11,I need to develop Zephyr code on an ESP32. It read dht11 each five seconds. The dht11 connects to gpio 2.
+Zephyr_Warn,I need to develop Zephyr code on an ESP32. It reads the DHT11 every 5 seconds and turns on an LED warning when the temperature exceeds a threshold.
+Contiki_MQTT,I need to develop a Contiki program for the NRF52840 that connects to an MQTT broker at 47.102.103.1:1883 to publish state (”work or not work”) each five seconds.
+Contiki_DHT11,I need to develop Contiki code on an NRF52840. It read dht11 each five seconds. The dht11 connects to gpio 2.
+Contiki_UDP,I need to develop a Contiki program for the NRF52840 that connects to a UDP server at `47.102.103.1:20001` to send device state (”work or not work”) by UDP method every five seconds.
+Contiki_COAP,"I need to develop Contiki code on an NRF52840, which  sends a CoAP request to an COAP server. The program is configured to send CoAP POST requests ""Hello, COAP Cloud"" to the COAP server at IP address ""47.102.103.1"" and port 5683, with the URI path ""/coap/test"". "
+Contiki_led,I need to develop Contiki code on an NRF52840. It read dht11 each five seconds and turn on a rgb_led.
+FreeRTOS_MQTT,"I need to develop a FreeRTOS program for the ESP32 that first ensures WIFI connected and connects to an MQTT broker at 47.102.103.1:1883 to publish state (""work or not work"") each five seconds."
+FreeRTOS_COAP,"I need to develop FreeRTOS  code on an ESP32, which sends a CoAP request to a COAP server. The program is configured to send CoAP POST requests """"Hello, COAP Cloud"""" to the COAP server at IP address """"47.102.103.1"""" and port 5683, with the URI path """"/coap/test"""".  It needs to ensure WIFI connected."
+FreeRTOS_UDP,"I need to develop a FreeRTOS  program for the ESP32 that connects to a UDP server at `47.102.103.1:20001` to send device state (”work or not work”) by UDP method every five seconds. It needs to ensure WIFI connected."""
+FreeRTOS_FLASH,"I need to develop FreeRTOS code on an ESP32 that uses Non-Volatile Storage (NVS) to store a device state (”1” or “0”) persistently. This process repeats every second, ensuring the temperature is continuously updated in storage."
+FreeRTOS_MMA,I need to develop FreeRTOS code on an ESP32. It read MMA8x5x by I2Cevery 5 seconds.
+Multimodal_HAR," Given a multimodal dataset containing three modalities: audio, depth camera, and radar data. Please write some Python code to implement a multimodal human activity recognition system. PyTorch is the preferred framework for machine learning.
+
+* Workflow *
+1. Load all the audio, depth camera, and radar data from the dataset.
+2. Split the data into training and testing parts.
+3. Construct and train a multimodal machine learning model using the training data.
+4. Evaluate the activity recognition accuracy of the model using the testing data.
+5. Output the average recognition accuracy.
+
+* Input *
+The file path to the multimodal dataset
+
+* Output Format *
+Average recognition accuracy on test data: 95%
+
+* Remarks *
+- There are four 'npy' files in the dataset path, i.e., 'audio.npy', 'depth.npy', 'radar.npy', and 'label.npy'. Each file contains 7484 data records.
+- The shape of 'audio.npy' is (7484, 20, 87).
+- The shape of 'depth.npy' is (7484, 16, 112, 112).
+- The shape of 'radar.npy' is (7484, 20, 2, 16, 32, 16).
+- The shape of 'label.npy' is (7484,).
+- There are 11 activities in total, with label ranging from 0 to 10"""""""
+mmWave_HAR,"Given the 'XRF55' dataset, please write some Python code to implement a human activity recognition system. PyTorch is the preferred framework for machine learning.
+
+* Workflow *
+1. Load all the RFID data from the dataset.
+2. Split the data into training and testing parts.
+3. Construct and train a ResNet-18 model using the training data.
+4. Evaluate the activity recognition accuracy of the model using the testing data.
+5. Output the average recognition accuracy.
+
+* Input *
+The file path to the XRF55 dataset
+
+* Output Format *
+Average recognition accuracy on test data: 95%
+
+* Remarks *
+- The dataset is a single 'npy' file with a shape of (4400, 23, 148). 
+- The corresponding label is a single 'npy' file with a length of 4400.
+- The dataset contains 4400 RFID data records. Each data has a shape of (23, 148).
+- There are 11 activities in total, with label ranging from 0 to 10"""""""
+IMU_HAR,"Given the WIreless Sensor Data Mining (WISDM) dataset containing Accelerometer data collected from smartphone, please develop a human activity recognition system. Please first preprocess the WISDM data and divide it into two parts for training and testing. Then, construct a machine learning model to recognize the activity. Finally, output the average recognition accuracy on the test dataset. PyTorch framework is preferred and I have a powerful GPU. The generated code should be directly executable.
+
+* Remarks *
+- I only have a gz file (already extracted) named 'WISDM_ar_latest.tar.gz' downloaded from its official website.
+- I have extracted the file to a folder, containing the following files:
+    - WISDM_ar_v1.1_raw.txt
+    - WISDM_ar_v1.1_raw_about.txt
+    - WISDM_ar_v1.1_trans_about.txt
+    - readme.txt
+    - WISDM_ar_v1.1_transformed.arff
+
+* Input *
+The path to the extracted folder.
+/root/iotpilotv2/datasets/sensing/IMU
+
+* Output Format *
+Average recognition accuracy: 0.90"""""""
+Heartbeat_detection,"Given the 'MIT-BIH Arrhythmia Database', please first load all the ECG records and detect all the R-peaks. Then, evaulate the detection result and output the detection accuracy for each record. Please output the detection result and the detection accuracy following the output format stated below. The 'R-peak indices' must be a numpy list.
+
+* Input *
+The file path to the MIT-BIH Arrhythmia Database.
+/root/iotpilotv2/datasets/sensing/ECG
+* Output Format *
+Case {ECG data record name}
+R-peak indices: [0, 1, 2, ...]
+Detection accuracy: 0.92
+
+Case {ECG data record name}
+R-peak indices: [...]
+Detection accuracy: 0.90
+
+
+* Remarks *
+- I have extracted the file to a folder.
+- The program should be directly executed."""""""
+ControlLED,"Build a LED ThingModule that can interact with a physical LED device (which is connected to a Raspberry Pi), including turning the LED on/off, controling the color and brightness. You shoud use Python."
+ControlRoom,"Build a Room ThingModule that can collectively control multiple cross-vendor LEDs, including turning the LEDs on/off, controling the color, and brightness. You shoud use Python."
+RecognizeFace,Build a FaceRecog ThingModule that can takes in an image and generates an event if the recognition result matches the predefined labels. The input image is in /root/iotpilotv2/datasets/sensing/shihao.png. You should use Python.
+SensorFusion,"Build a Fusion ThingModule that takes in data from an IMU ThingModule and a GNSS ThingModule, performs Kalman filter to fuse these data, and generates the fusion results. You should use Python."
+DingTalkNotification,Write an IFTTT policy that notifies the user's DingTalk account when the FaceRecog generates a mismatch event. You should use Python.
+motion_sensor_80,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the motion state of the bathroom's motion sensor is true, turn on the bedroom light and set the brightness to 80%..
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
+environment_air,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the bedroom air conditioner's environment service detects a temperature higher than 30°C, turn on the air conditioner and set the mode to cool
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
+motion_sensor_20,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the motion state of the bathroom's motion sensor is true, turn on the bathroom light and set the brightness to 20%.
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
+illumination_sensor,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the bedroom illumination sensor detects illumination below 50 lux, turn on the bedroom lights and set the color to white which is 16777215.
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
+motion_sensor_color_white,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the motion state of the bathroom's motion sensor is true, turn on the bedroom light, set the brightness to 80%, set the color to white which is 16777215.
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
+motion_sensor_warm_white,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the motion state of the bathroom's motion sensor is true, turn on the bedroom light, set the brightness to 80%, and set the color temperature to warm white which is 4000K.
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
+environment_heat_fan,"# Role
+You are a useful assistant named TapGenerator in the field of smart home. Your task is to parse user input into trigger-action program（TAP）.TAP consists of three parts: trigger, condition and action. The trigger is the event that triggers the automation. The condition is the condition that must be met for the automation to run. The action is the task that the automation will perform. The trigger and action are required, while the condition is optional.
+
+# Input
+1. User request: If the bedroom air conditioner's environment service detects that the temperature is below 10°C, turn on the air conditioner, set the air conditioning mode to heat, and set the fan speed to auto.
+2. Device list: [
+    {
+        ""id"": 1,
+        ""area"": ""bathroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 2,
+        ""area"": ""bathroom"",
+        ""type"": ""motion-sensor"",
+        ""services"": {
+            ""motion-sensor"": {
+                ""motion-state"": {
+                    ""description"": ""Motion State"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 3,
+        ""area"": ""bedroom"",
+        ""type"": ""light"",
+        ""services"": {
+            ""light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""brightness"": {
+                    ""description"": ""Brightness"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                ""color-temperature"": {
+                    ""description"": ""Color Temperature"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""kelvin"",
+                    ""value-range"": [
+                        1700,
+                        6500,
+                        1
+                    ]
+                },
+                ""color"": {
+                    ""description"": ""Color"",
+                    ""format"": ""uint32"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""rgb"",
+                    ""value-range"": [
+                        1,
+                        16777215,
+                        1
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Color""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Day""
+                        }
+                    ]
+                }
+            },
+            ""light-extension"": {
+                ""brightness-delta"": {
+                    ""description"": ""Adjust brightness"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-delta"": {
+                    ""description"": ""Adjust Color Temperature"",
+                    ""format"": ""int8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""unit"": ""percentage"",
+                    ""value-range"": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                ""ct-adjust-alexa"": {
+                    ""description"": ""Alexa Adjust Color Temperature"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Increase""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Decrease""
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 4,
+        ""area"": ""bedroom"",
+        ""type"": ""air-conditioner"",
+        ""services"": {
+            ""air-conditioner"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""mode"": {
+                    ""description"": ""Mode"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 2,
+                            ""description"": ""Cool""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Dry""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Fan""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Heat""
+                        }
+                    ]
+                },
+                ""target-temperature"": {
+                    ""description"": ""Target Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                ""eco"": {
+                    ""description"": ""ECO"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""heater"": {
+                    ""description"": ""Heater"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""dryer"": {
+                    ""description"": ""Dryer"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""sleep-mode"": {
+                    ""description"": ""Sleep Mode"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""fan-control"": {
+                ""fan-level"": {
+                    ""description"": ""Fan Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ],
+                    ""value-list"": [
+                        {
+                            ""value"": 0,
+                            ""description"": ""Auto""
+                        },
+                        {
+                            ""value"": 1,
+                            ""description"": ""Level1""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Level2""
+                        },
+                        {
+                            ""value"": 3,
+                            ""description"": ""Level3""
+                        },
+                        {
+                            ""value"": 4,
+                            ""description"": ""Level4""
+                        },
+                        {
+                            ""value"": 5,
+                            ""description"": ""Level5""
+                        },
+                        {
+                            ""value"": 6,
+                            ""description"": ""Level6""
+                        },
+                        {
+                            ""value"": 7,
+                            ""description"": ""Level7""
+                        }
+                    ]
+                },
+                ""horizontal-swing"": {
+                    ""description"": ""Horizontal Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                },
+                ""vertical-swing"": {
+                    ""description"": ""Vertical Swing"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""environment"": {
+                ""temperature"": {
+                    ""description"": ""Temperature"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""celsius"",
+                    ""value-range"": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            ""alarm"": {
+                ""alarm"": {
+                    ""description"": ""Alarm"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""indicator-light"": {
+                ""on"": {
+                    ""description"": ""Switch Status"",
+                    ""format"": ""bool"",
+                    ""access"": [
+                        ""read"",
+                        ""write"",
+                        ""notify""
+                    ]
+                }
+            },
+            ""maintenance"": {
+                ""clean"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""examine"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                },
+                ""error"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""notify""
+                    ]
+                }
+            },
+            ""enhance"": {
+                ""fan-percent"": {
+                    ""description"": """",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""write"",
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""value-range"": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                ""timer"": {
+                    ""description"": """",
+                    ""format"": ""string"",
+                    ""access"": [
+                        ""read"",
+                        ""notify"",
+                        ""write""
+                    ]
+                }
+            }
+        }
+    },
+    {
+        ""id"": 5,
+        ""area"": ""bedroom"",
+        ""type"": ""illumination-sensor"",
+        ""services"": {
+            ""illumination-sensor"": {
+                ""illumination"": {
+                    ""description"": ""Illumination"",
+                    ""format"": ""float"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""lux"",
+                    ""value-range"": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            ""battery"": {
+                ""battery-level"": {
+                    ""description"": ""Battery Level"",
+                    ""format"": ""uint8"",
+                    ""access"": [
+                        ""read"",
+                        ""notify""
+                    ],
+                    ""unit"": ""none"",
+                    ""value-list"": [
+                        {
+                            ""value"": 1,
+                            ""description"": ""Normal""
+                        },
+                        {
+                            ""value"": 2,
+                            ""description"": ""Low""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
+
+
+# Workflow
+1. Understand the user's request, and extract the trigger, condition and action in the user request.
+2. Find the corresponding device, service and its properties based on the trigger, condition and action.
+3. Generate the TAP in target format, and return the TAP.
+4. In the process below, you need to consider the following situations:
+Case 1: If you cannot find clear trigger or action, you should tell the user that they missed some information.
+Case 2: If you canot find the corresponding device or service, you should tell the user that the device or service is not found.
+Case 3: If there are multiple devices that match the user request, you should ask the user to provide more information.
+Case 4: If you have found the corresponding device and service, but you cannot fill in the value of the property in TAP because the user request is ambiguous, you should ask the user to provide more information.
+
+# Output
+Your output should AlWAYS in the following format:
+
+FORMAT_EXAMPLE = '''
+---
+According to your workflow, your have two Action_type: AskUser and Finish.
+In AskUser type, you must return a json including ""Thought"", ""Action_type"" and ""Say_to_user"". ""Say_to_user"" is the response to the user to ask for more information. 
+In Finish type,you must return a json including ""Thought"" ,""Action_type"", ""TAP"" and ""Say_to_user"". ""Thought"" is the reasoning process of how you generate the TAP. ""TAP"" is a json expression in format of {""trigger"": <trigger>, ""condition"": <condition>, ""action"": <action>}. <trigger>, <condition> and <action> are formed by basic elements ""id.service.property<op><state>"". The <op> in <trigger> and <condition> is chosen from ""<"", "">"", or ""=="" while the <op> in <action> must be ""="" . The <state> is a value which can be of various types based on the property type, including bool, int, and string. In <trigger> and <action>, elements are separated by "","". In <condition>, elements are combined using ""and"", ""or"" and ""()"", such as ""condition_1&& (condition_2||condition_3)"".
+Please note that the language of ""Say_to_user"" should be in the same language as the user request.
+
+# Examples
+Given the device list is as follows:
+[{""id"":1,""area"":""living room"",""type"":""light"",""services"":{""light"":{""on"":{""description"":""Switch Status"",""format"":""bool"",""access"":[""read"",""write"",""notify""]},""brightness"":{""description"":""Brightness"",""format"":""uint16"",""access"":[""read"",""write"",""notify""],""unit"":""percentage"",""value-range"":[1,65535,1]},""color_temperature"":{""description"":""Color Temperature"",""format"":""uint32"",""access"":[""read"",""write"",""notify""],""unit"":""kelvin"",""value-range"":[2700,6500,1]}}}},{""id"":2,""area"":""entry door"",""type"":""magnet_sensor"",""services"":{""magnet_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""uint8"",""access"":[""read"",""notify""],""value-list"":[{""value"":1,""description"":""Weak""},{""value"":2,""description"":""Strong""}]},""contact_state"":{""description"":""Contact State"",""format"":""bool"",""access"":[""read"",""notify""]}}}},{""id"":3,""name"":""光照度传感器"",""area"":""living room"",""type"":""illumination_sensor"",""services"":{""illumination_sensor"":{""illumination"":{""description"":""Illumination"",""format"":""float"",""access"":[""read"",""notify""],""unit"":""lux"",""value-range"":[0,83000,1]}}}}]
+Then given the following user request:
+Case 1: ""turn on the light when I come back home."", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is 'come back home', the action is 'turn on the light' and there is no condition. For the trigger, the device is the magnet_sensor in the entry door and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""TAP"": {
+        ""trigger"": ""2.magnet_sensor.contact_state==true"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}
+Case 2: ""当我回家的时候，打开电视"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '当我回家的时候', the action is '打开电视' and there is no condition. For the trigger, the device is the magnet_sensor in the living room and the id is 2. The service is magnet_sensor. The property is contact_state. The state is true. For the action, there is no TV in the device list."",
+    ""Say_to_user"": ""抱歉，我找不到电视机。请您提供更多信息。"",
+    ""Action_type"": ""AskUser""
+}
+Case 3: ""当客厅比较暗时，打开灯"", your output should be:
+{
+    ""Thought"": ""Based on the user request, the trigger is '家里比较暗', the action is '打开灯' and there is no condition. For the trigger, the device is the illumination_sensor in the living room and the id is 3. The service is illumination_sensor. The property is illumination. The op is <. '比较暗' is a fuzzy concept, I predefined the range of '比较暗' is [0, 50] lux. The state is 50, but I need to confirm it with the user. For the action, the device is the light in the living room and the id is 1. The service is light. The property is on. The state is true."",
+    ""Say_to_user"": ""一般来说，家里比较暗是指光照度小于50勒克斯。请问您是否同意这个阈值？"",
+    ""Action_type"": ""AskUser""
+}
+Case 4: After Case 3, user response ""是"", your output should be:
+{
+    ""Thought"": ""The user agreed that '比较暗' is less than 50 lux. So the state of the trigger is 50. The TAP is generated successfully."",
+    ""TAP"": {
+        ""trigger"": ""3.illumination_sensor.illumination<50"",
+        ""condition"": """",
+        ""action"": ""1.light.on=true""
+    },
+    ""Say_to_user"": ""Ok, I have generated the TAP for you."",
+    ""Action_type"": ""Finish""
+}"
