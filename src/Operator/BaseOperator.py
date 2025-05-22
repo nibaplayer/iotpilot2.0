@@ -1,5 +1,6 @@
 import time
 from langchain.schema import BaseMessage, HumanMessage, SystemMessage
+from utils import get_llm, extract_module_code
 class BaseOperator:
     """
     Base class for all operators. 
@@ -43,4 +44,5 @@ class BaseOperator:
         end_time = time.time()
         self._cost["time"] += end_time - start_time
         response = response.content
+        response = extract_module_code(response)[0]
         return response  
