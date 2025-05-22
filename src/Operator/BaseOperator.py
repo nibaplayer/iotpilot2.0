@@ -1,6 +1,10 @@
 import time
-from langchain.schema import BaseMessage, HumanMessage, SystemMessage
-from utils import get_llm, extract_module_code
+from langchain.schema import BaseMessage
+from utils import extract_module_code
+from langchain_openai import ChatOpenAI
+from pydantic import SecretStr
+from typing import Union
+from config import *
 class BaseOperator:
     """
     Base class for all operators. 
@@ -46,3 +50,10 @@ class BaseOperator:
         response = response.content
         response = extract_module_code(response)[0]
         return response  
+    def get_llm(model: str, temperature: float = 0)->Union[ChatOpenAI,None]:
+        if model not in CANDIATE_MODEL:
+            raise ValueError(f"Model {model} is not supported. Supported models are: {CANDIATE_MODEL}")
+        elif model in ["gpt-4o"]:
+            llm = ChatOpenAI(model="gpt-4o", temperature=temperature, base_url=OPENAI_BASE_URL, api_key=SecretStr(OPENAI_KEY))
+
+        return llm

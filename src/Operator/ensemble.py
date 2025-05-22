@@ -2,7 +2,6 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 from .BaseOperator import BaseOperator
 from utils import extract_module_code
@@ -22,7 +21,7 @@ class EnsembleOperator(BaseOperator):
     def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 3):
         super().__init__(model=model, temperature=temperature)
         self.num_agents = num_agents
-        self.llm = get_llm(model, temperature=temperature)
+        self.llm = self.get_llm(model, temperature=temperature)
         self.system_decompose_prompt = """
         You are an AI assistant that breaks down complex tasks into smaller, manageable subtasks.
         Given the following task:

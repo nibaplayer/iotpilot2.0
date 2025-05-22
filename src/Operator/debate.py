@@ -2,7 +2,6 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 from .BaseOperator import BaseOperator
 from utils import extract_module_code
@@ -21,7 +20,7 @@ class DebateOperator(BaseOperator):
     def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 2):
         super().__init__(model=model, temperature=temperature)
         self.num_agents = num_agents
-        self.llm = get_llm(model, temperature=temperature)
+        self.llm = self.get_llm(model, temperature=temperature)
         
         # Instructions for debate process
         self.debate_initial_instruction = "Please think step by step and then solve the task. Use ``` to wrap code."
@@ -37,7 +36,7 @@ class DebateOperator(BaseOperator):
             raise ValueError("No input provided. Please provide a query/task.")
 
         # Initialize debate agents with different roles and a moderate temperature for varied reasoning
-        debate_agents = [get_llm(self.model, temperature=0.8) for _ in range(self.num_agents)]
+        debate_agents = [self.get_llm(self.model, temperature=0.8) for _ in range(self.num_agents)]
         agent_roles = self.default_roles[:self.num_agents]  # Use default roles based on number of agents
         
         max_round = 2  # Maximum number of debate rounds

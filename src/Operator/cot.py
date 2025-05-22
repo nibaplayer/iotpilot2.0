@@ -2,7 +2,6 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 import time
 from .BaseOperator import BaseOperator
@@ -11,7 +10,7 @@ from utils import extract_module_code
 class CoT(BaseOperator):
     def __init__(self,model: str,temperature: float=0.5):
         self.model = model
-        self.llm = get_llm(model, temperature)
+        self.llm = self.get_llm(model, temperature)
         self.system_prompt = f"""
 You are a programming assistant that solves problems step by step.        
 When solving programming problems:

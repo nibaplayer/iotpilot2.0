@@ -2,7 +2,6 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 import time
 from .BaseOperator import BaseOperator
@@ -22,8 +21,8 @@ class Reflexion(BaseOperator):
     """
     def __init__(self, model: str, temperature: float=0.5, max_iterations: int=3):
         super().__init__(model=model, temperature=temperature)
-        self.initial_llm = get_llm(model, temperature=temperature)
-        self.reflect_llm = get_llm(model, temperature=0.3)  # Lower temperature for stable reflections
+        self.initial_llm = self.get_llm(model, temperature=temperature)
+        self.reflect_llm = self.get_llm(model, temperature=0.3)  # Lower temperature for stable reflections
         self.system_initial_prompt = """
 You are an expert problem solver who thinks step-by-step.
 When solving problems:

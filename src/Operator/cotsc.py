@@ -2,7 +2,6 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from utils import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 import time
 from .BaseOperator import BaseOperator
@@ -23,8 +22,8 @@ class CoTSC(BaseOperator):
     """
     def __init__(self,model: str,temperature: float=0.5, N:int=5):
         super().__init__(model=model, temperature=temperature)
-        self.cot_llm = get_llm(model, temperature=0.7)
-        self.final_llm = get_llm(model, temperature=0.1)
+        self.cot_llm = self.get_llm(model, temperature=0.7)
+        self.final_llm = self.get_llm(model, temperature=0.1)
         self.system_cot_prompt = f"""
 You are a programming assistant that solves problems step by step.        
 When solving programming problems:
@@ -54,7 +53,7 @@ Given all the above solutions, reason over them carefully and provide a final an
         # Generate N different responses with the same prompt but different temperature
         for i in range(self.N):
             # Adjust temperature for diversity in reasoning paths
-            temp_llm = get_llm(model="gpt-4o", temperature=0.7)
+            temp_llm = self.get_llm(model="gpt-4o", temperature=0.7)
             messages = [SystemMessage(self.system_cot_prompt), HumanMessage(user_query)]
             response = temp_llm.invoke(messages)
             all_responses.append(response)
