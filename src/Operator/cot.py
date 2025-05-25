@@ -12,14 +12,14 @@ class CoT(BaseOperator):
         self.model = model
         self.llm = self.get_llm(model, temperature)
         self.system_prompt = f"""
-You are a programming assistant that solves problems step by step.        
-When solving programming problems:
-1. First, understand what the problem is asking for
-2. Consider the inputs, expected outputs, and constraints
-3. Break the problem down into smaller components
-4. Write the outline of your approach
-5. Briefly explain key parts of your approach\n
-"""
+                            You are a programming assistant that solves problems step by step.        
+                            When solving programming problems:
+                            1. First, understand what the problem is asking for
+                            2. Consider the inputs, expected outputs, and constraints
+                            3. Break the problem down into smaller components
+                            4. Write the outline of your approach
+                            5. Briefly explain key parts of your approach\n
+                            """
         self._cost = {"input_token": 0, "output_tokens":0,"time": 0}
     def _run(self, query=None):
         """
@@ -33,7 +33,7 @@ When solving programming problems:
         
         messages = [SystemMessage(self.system_prompt), HumanMessage(user_query)]
         response = self.llm.invoke(messages)
-        self._update_cost(response)
+        self._update_cost(messages, response)
         return response
      
 

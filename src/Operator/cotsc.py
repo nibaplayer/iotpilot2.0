@@ -25,17 +25,17 @@ class CoTSC(BaseOperator):
         self.cot_llm = self.get_llm(model, temperature=0.7)
         self.final_llm = self.get_llm(model, temperature=0.1)
         self.system_cot_prompt = f"""
-You are a programming assistant that solves problems step by step.        
-When solving programming problems:
-1. First, understand what the problem is asking for
-2. Consider the inputs, expected outputs, and constraints
-3. Break the problem down into smaller components
-4. Write the outline of your approach
-5. Briefly explain key parts of your approach\n
-"""
+                                You are a programming assistant that solves problems step by step.        
+                                When solving programming problems:
+                                1. First, understand what the problem is asking for
+                                2. Consider the inputs, expected outputs, and constraints
+                                3. Break the problem down into smaller components
+                                4. Write the outline of your approach
+                                5. Briefly explain key parts of your approach\n
+                                """
         self.system_final_prompt = f"""
-Given all the above solutions, reason over them carefully and provide a final answer.
-"""
+                                Given all the above solutions, reason over them carefully and provide a final answer.
+                                """
         self.N = N  # Number of reasoning paths to generate
     def _run(self, query=None):
         """
@@ -57,26 +57,27 @@ Given all the above solutions, reason over them carefully and provide a final an
             messages = [SystemMessage(self.system_cot_prompt), HumanMessage(user_query)]
             response = temp_llm.invoke(messages)
             all_responses.append(response)
-            self._update_cost(response)
+            self._update_cost(messages, response)
             solution_content += f"SOLUTION {i+1}:\n{response.content}\n"
         # Synthesize a final answer using all collected responses
         synthesis_prompt = f"""
-I have generated {self.N} different solutions to this problem using chain-of-thought reasoning.
-Here are all the solutions:
+                            I have generated {self.N} different solutions to this problem using chain-of-thought reasoning.
+                            Here are all the solutions:
 
-{solution_content}
+                            {solution_content}
 
-Please carefully analyze all these solutions. Identify the most common elements, correct any mistakes, and synthesize a final, accurate solution to the original problem:
+                            Please carefully analyze all these solutions. Identify the most common elements, correct any mistakes, 
+                            and synthesize a final, accurate solution to the original problem:
 
-{input_text}
+                            {input_text}
 
-Provide a clear, step-by-step reasoning process for this final solution.
-"""
+                            Provide a clear, step-by-step reasoning process for this final solution.
+                            """
         # Use a lower temperature for the final synthesis to ensure stability
         final_llm = self.final_llm
         messages = [SystemMessage(self.system_final_prompt), HumanMessage(synthesis_prompt)]
         final_response = final_llm.invoke(messages)
-        self._update_cost(final_response)
+        self._update_cost(messages, response)
         return final_response
      
 

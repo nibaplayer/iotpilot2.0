@@ -79,12 +79,9 @@ class EnsembleOperator(BaseOperator):
         decomposition_prompt = self.system_decompose_prompt.format(task=query, num_agents=self.num_agents)
         messages = [SystemMessage("You are a helpful assistant."), HumanMessage(decomposition_prompt)]
         decomposition_response = self.llm.invoke(messages)
-        print(messages)
-        self._update_cost(decomposition_response)
+        self._update_cost(messages, decomposition_response)
                 
         subtasks = extract_module_code(decomposition_response.content)
-        print(f"Extracted subtasks (module code blocks): {subtasks}")
-
         if len(subtasks) != self.num_agents:
             raise ValueError(f"{len(subtasks)} subtasks generated. Need exactly {self.num_agents}.")
 
@@ -94,7 +91,7 @@ class EnsembleOperator(BaseOperator):
             print(f"Processing subtask {i+1}/{self.num_agents}: {subtask}")
             messages = [SystemMessage("You are a helpful assistant.  You need to generate complete code. Use ``` to wrap the code."), HumanMessage(subtask)]
             response = self.llm.invoke(messages)
-            self._update_cost(response)
+            self._update_cost(messages, response)
             all_subtask_results.append(f"SUBTASK {i+1}:\n{response.content}")
 
         # Step 3: Merge results into a final answer
@@ -104,7 +101,7 @@ class EnsembleOperator(BaseOperator):
             HumanMessage(merge_prompt)
         ]
         final_response = self.llm.invoke(messages)
-        self._update_cost(final_response)
+        self._update_cost(messages, final_response)
 
         return final_response
 

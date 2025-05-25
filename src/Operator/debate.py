@@ -57,7 +57,7 @@ class DebateOperator(BaseOperator):
                         HumanMessage(query)
                     ]
                     response = debate_agents[i].invoke(messages)
-                    self._update_cost(response)
+                    self._update_cost(messages, response)
                     thinking = response.content
                     answer = response.content
                     print(f"[DEBUG] Agent '{agent_roles[i]}' completed initial reasoning.")
@@ -71,7 +71,7 @@ class DebateOperator(BaseOperator):
                         HumanMessage(context_str)
                     ]
                     response = debate_agents[i].invoke(messages)
-                    self._update_cost(response)
+                    self._update_cost(messages, response)
                     thinking = response.content
                     answer = response.content
                     print(f"[DEBUG] Agent '{agent_roles[i]}' completed updated solution.")
@@ -90,7 +90,7 @@ class DebateOperator(BaseOperator):
             HumanMessage(final_input_str)
         ]
         final_response = self.llm.invoke(messages)
-        self._update_cost(final_response)
+        self._update_cost(messages, response)
 
         cost = self.get_cost()
         

@@ -5,6 +5,8 @@ from langchain_openai import ChatOpenAI
 from pydantic import SecretStr
 from typing import Union
 from config import *
+import tiktoken
+
 class BaseOperator:
     """
     Base class for all operators. 
@@ -20,15 +22,20 @@ class BaseOperator:
         Run the operator on the input or query.
         """
         raise NotImplementedError("Subclasses should implement this method.")
-    def _update_cost(self,response: BaseMessage):
+    def _update_cost(self, input_text, response_text):
         """
-        Update the cost based on the response.
+        Update the cost based on locally calculated token count using tiktoken.
+        
+        Args:
+            input_text (str): The input text sent to the model.
+            response_text (str): The output text received from the model.
         """
-        if self.model in ["gpt-4o"]:
-            current_cost = response.response_metadata['token_usage']
-            self._cost["input_token"] += current_cost['prompt_tokens']
-            self._cost["output_tokens"] += current_cost['completion_tokens']
-        return
+        encoding = tiktoken.encoding_for_model(self.model)
+        input_tokens = len(encoding.encode(str(input_text)))
+        output_tokens = len(encoding.encode(str(response_text)))
+        
+        self._cost["input_token"] += input_tokens
+        self._cost["output_tokens"] += output_tokens
     def reset_cost(self):
         """
         Reset the cost to zero.
@@ -36,8 +43,7 @@ class BaseOperator:
         self._cost = {"input_token": 0, "output_tokens":0,"time": 0}
         return
     def get_cost(self):
-        #TODO: Implement the validation logic
-        # For now, we will just return a dummy cost
+        # return the cost
         return self._cost
     def run(self, query=None):
         """
@@ -48,12 +54,12 @@ class BaseOperator:
         end_time = time.time()
         self._cost["time"] += end_time - start_time
         response = response.content
-        response = extract_module_code(response)[0]
-        return response  
-    def get_llm(model: str, temperature: float = 0)->Union[ChatOpenAI,None]:
+        response_format = extract_module_code(response)
+        return response_format  
+    def get_llm(self, model: str, temperature: float = 0)->Union[ChatOpenAI,None]:
         if model not in CANDIATE_MODEL:
             raise ValueError(f"Model {model} is not supported. Supported models are: {CANDIATE_MODEL}")
-        elif model in ["gpt-4o"]:
-            llm = ChatOpenAI(model="gpt-4o", temperature=temperature, base_url=OPENAI_BASE_URL, api_key=SecretStr(OPENAI_KEY))
+        else:
+            llm = ChatOpenAI(model=model, temperature=temperature, base_url=OPENAI_BASE_URL, api_key=SecretStr(OPENAI_KEY))
 
         return llm
