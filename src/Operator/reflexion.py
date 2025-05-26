@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 import time
-from .BaseOperator import BaseOperator
+from Operator import BaseOperator
 
 class Reflexion(BaseOperator):
     """
@@ -19,8 +19,8 @@ class Reflexion(BaseOperator):
         temperature (float|None): Temperature parameter for the language model.
         max_iterations (int): Maximum number of reflection iterations (default=3).
     """
-    def __init__(self, model: str, temperature: float=0.5, max_iterations: int=3):
-        super().__init__(model=model, temperature=temperature)
+    def __init__(self, model: str, temperature: float=0.5, max_iterations: int=3, **kwargs):
+        super().__init__(model=model, temperature=temperature, **kwargs)
         self.initial_llm = self.get_llm(model, temperature=temperature)
         self.reflect_llm = self.get_llm(model, temperature=0.3)  # Lower temperature for stable reflections
         self.system_initial_prompt = """
@@ -71,7 +71,7 @@ class Reflexion(BaseOperator):
         messages = [SystemMessage(self.system_initial_prompt), HumanMessage(user_query)]
         current_solution = self.initial_llm.invoke(messages)
         response_id = current_solution.response_metadata['id']
-        self._update_cost(messages, current_solution)
+        self._update_cost(messages, current_solution.content)
         
         # Subsequent rounds: Reflection and improvement
         for i in range(self.max_iterations - 1):
@@ -97,7 +97,7 @@ class Reflexion(BaseOperator):
             messages.extend([current_solution]+new_messages)
             improved_solution = self.reflect_llm.invoke(messages)
             # response_id = improved_solution.response_metadata['id']
-            self._update_cost(messages, improved_solution)
+            self._update_cost(messages, improved_solution.content)
             
             # Set improved solution as current for next iteration
             current_solution = improved_solution
@@ -112,7 +112,7 @@ class Reflexion(BaseOperator):
         new_messages = [SystemMessage(self.system_final_prompt), HumanMessage(final_prompt)]
         messages.extend([current_solution]+new_messages)
         final_solution = self.reflect_llm.invoke(messages)
-        self._update_cost(messages, final_solution)
+        self._update_cost(messages, final_solution.content)
         
         return final_solution
 

@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
-from .BaseOperator import BaseOperator
+from Operator import BaseOperator
 from utils import extract_module_code
 
 class DebateOperator(BaseOperator):
@@ -17,8 +17,8 @@ class DebateOperator(BaseOperator):
         num_agents (int): Number of agents to work on subtasks.
     """
 
-    def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 2):
-        super().__init__(model=model, temperature=temperature)
+    def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 2, **kwargs):
+        super().__init__(model=model, temperature=temperature, **kwargs)
         self.num_agents = num_agents
         self.llm = self.get_llm(model, temperature=temperature)
         
@@ -43,26 +43,26 @@ class DebateOperator(BaseOperator):
         all_thinking = [[] for _ in range(max_round)]
         all_answer = [[] for _ in range(max_round)]
 
-        print(f"[INFO] Starting debate process with {self.num_agents} agents.")
+        # print(f"[INFO] Starting debate process with {self.num_agents} agents.")
         
         # Perform debate rounds
         for r in range(max_round):
-            print(f"[INFO] Starting debate round {r + 1}/{max_round}")
+            # print(f"[INFO] Starting debate round {r + 1}/{max_round}")
             
             for i in range(len(debate_agents)):
                 if r == 0:
-                    print(f"[DEBUG] Agent '{agent_roles[i]}' starting initial reasoning.")
+                    # print(f"[DEBUG] Agent '{agent_roles[i]}' starting initial reasoning.")
                     messages = [
                         SystemMessage("You are a helpful assistant and " + agent_roles[i] + ". " + self.debate_initial_instruction),
                         HumanMessage(query)
                     ]
                     response = debate_agents[i].invoke(messages)
-                    self._update_cost(messages, response)
+                    self._update_cost(messages, response.content)
                     thinking = response.content
                     answer = response.content
-                    print(f"[DEBUG] Agent '{agent_roles[i]}' completed initial reasoning.")
+                    # print(f"[DEBUG] Agent '{agent_roles[i]}' completed initial reasoning.")
                 else:
-                    print(f"[DEBUG] Agent '{agent_roles[i]}' updating solution based on peers' feedback.")
+                    # print(f"[DEBUG] Agent '{agent_roles[i]}' updating solution based on peers' feedback.")
                     input_context = [query] + [all_thinking[r-1][i]] + all_thinking[r-1][:i] + all_thinking[r-1][i+1:]
                     context_str = "\n".join(input_context)
                     
@@ -71,7 +71,7 @@ class DebateOperator(BaseOperator):
                         HumanMessage(context_str)
                     ]
                     response = debate_agents[i].invoke(messages)
-                    self._update_cost(messages, response)
+                    self._update_cost(messages, response.content)
                     thinking = response.content
                     answer = response.content
                     print(f"[DEBUG] Agent '{agent_roles[i]}' completed updated solution.")
@@ -79,7 +79,7 @@ class DebateOperator(BaseOperator):
                 all_thinking[r].append(thinking)
                 all_answer[r].append(answer)
         
-        print("[INFO] All debate rounds completed. Preparing final decision.")
+        # print("[INFO] All debate rounds completed. Preparing final decision.")
         
         # Make the final decision based on all debate results and solutions
         final_input = [query] + all_thinking[max_round-1] + all_answer[max_round-1]
@@ -90,7 +90,7 @@ class DebateOperator(BaseOperator):
             HumanMessage(final_input_str)
         ]
         final_response = self.llm.invoke(messages)
-        self._update_cost(messages, response)
+        self._update_cost(messages, response.content)
 
         cost = self.get_cost()
         

@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 import time
-from .BaseOperator import BaseOperator
+from Operator import BaseOperator
 from utils import extract_module_code
 
 class CoTSC(BaseOperator):
@@ -20,8 +20,8 @@ class CoTSC(BaseOperator):
         temperature (float|None): Temperature parameter for the language model.
         N (int): Number of different reasoning paths to generate (default=5).
     """
-    def __init__(self,model: str,temperature: float=0.5, N:int=5):
-        super().__init__(model=model, temperature=temperature)
+    def __init__(self,model: str,temperature: float=0.5, N:int=5, **kwargs):
+        super().__init__(model=model, temperature=temperature, **kwargs)
         self.cot_llm = self.get_llm(model, temperature=0.7)
         self.final_llm = self.get_llm(model, temperature=0.1)
         self.system_cot_prompt = f"""
@@ -57,7 +57,7 @@ class CoTSC(BaseOperator):
             messages = [SystemMessage(self.system_cot_prompt), HumanMessage(user_query)]
             response = temp_llm.invoke(messages)
             all_responses.append(response)
-            self._update_cost(messages, response)
+            self._update_cost(messages, response.content)
             solution_content += f"SOLUTION {i+1}:\n{response.content}\n"
         # Synthesize a final answer using all collected responses
         synthesis_prompt = f"""
@@ -77,7 +77,7 @@ class CoTSC(BaseOperator):
         final_llm = self.final_llm
         messages = [SystemMessage(self.system_final_prompt), HumanMessage(synthesis_prompt)]
         final_response = final_llm.invoke(messages)
-        self._update_cost(messages, response)
+        self._update_cost(messages, final_response.content)
         return final_response
      
 

@@ -4,12 +4,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 import time
-from .BaseOperator import BaseOperator
+from Operator import BaseOperator
 from utils import extract_module_code
 
 class CoT(BaseOperator):
-    def __init__(self,model: str,temperature: float=0.5):
-        self.model = model
+    def __init__(self,model: str,temperature: float=0.5, **kwargs):
+        super().__init__(model=model, temperature=temperature, **kwargs)
         self.llm = self.get_llm(model, temperature)
         self.system_prompt = f"""
                             You are a programming assistant that solves problems step by step.        
@@ -33,7 +33,7 @@ class CoT(BaseOperator):
         
         messages = [SystemMessage(self.system_prompt), HumanMessage(user_query)]
         response = self.llm.invoke(messages)
-        self._update_cost(messages, response)
+        self._update_cost(messages, response.content)
         return response
      
 

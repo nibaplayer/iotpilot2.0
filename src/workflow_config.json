@@ -1,0 +1,25 @@
+{
+    "chatiot": {
+        "cot": {
+            "type": "cot",
+            "params": {"model": "gpt-4o", "temperature": 0.5},
+            "next": ["end"]
+        }
+    },
+
+    "IoTPilot":{
+        "ensemble": {
+            "type": "ensemble",
+            "params": {"model": "gpt-4o", "temperature": 0.5, "num_agents": 1},
+            "next": ["reviewer"]
+        },
+        "reviewer": {
+            "type": "reviewer",
+            "params": {"model": "gpt-4o", "temperature": 0.5},
+            "next": ["end"]
+        }
+
+    }
+
+    
+}

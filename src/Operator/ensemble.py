@@ -3,7 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
-from .BaseOperator import BaseOperator
+from Operator import BaseOperator
 from utils import extract_module_code
 
 class EnsembleOperator(BaseOperator):
@@ -18,8 +18,8 @@ class EnsembleOperator(BaseOperator):
         num_agents (int): Number of agents to work on subtasks.
     """
 
-    def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 3):
-        super().__init__(model=model, temperature=temperature)
+    def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 3, **kwargs):
+        super().__init__(model=model, temperature=temperature, **kwargs)
         self.num_agents = num_agents
         self.llm = self.get_llm(model, temperature=temperature)
         self.system_decompose_prompt = """
@@ -31,32 +31,33 @@ class EnsembleOperator(BaseOperator):
         Please must break it down into {num_agents} distinct and independent subtasks (modules) that can be processed in parallel.
         List them clearly and concisely.
 
-        Please write your modules answer using ```module.
+        Please write your modules answer using ```module.```
         Note, each moudule contains a function. The total number of modules is limited to {num_agents} or fewer.
-        For example:
-        ```module
-        void *thread1_function(void *arg) {{
-            (void)arg;
-            while (1) {{
-                printf("hello_world thread2\n");
-                xtimer_sleep(1);
-            }}
-            return NULL;
-        }}
-        ```
-
-        ```module
-        void *thread2_function(void *arg) {{
-            (void)arg;
-            while (1) {{
-                printf("hello_world thread1\n");
-                xtimer_sleep(1);
-            }}
-            return NULL;
-        }}
-        ```
-
         """
+        # For example:
+        # ```module
+        # void *thread1_function(void *arg) {{
+        #     (void)arg;
+        #     while (1) {{
+        #         printf("hello_world thread2\n");
+        #         xtimer_sleep(1);
+        #     }}
+        #     return NULL;
+        # }}
+        # ```
+
+        # ```module
+        # void *thread2_function(void *arg) {{
+        #     (void)arg;
+        #     while (1) {{
+        #         printf("hello_world thread1\n");
+        #         xtimer_sleep(1);
+        #     }}
+        #     return NULL;
+        # }}
+        # ```
+
+        # """
 
         self.system_merge_prompt = """
         Given the following subtask results:
@@ -79,35 +80,44 @@ class EnsembleOperator(BaseOperator):
         decomposition_prompt = self.system_decompose_prompt.format(task=query, num_agents=self.num_agents)
         messages = [SystemMessage("You are a helpful assistant."), HumanMessage(decomposition_prompt)]
         decomposition_response = self.llm.invoke(messages)
-        self._update_cost(messages, decomposition_response)
+        self._update_cost(messages, decomposition_response.content)
                 
         subtasks = extract_module_code(decomposition_response.content)
-        if len(subtasks) != self.num_agents:
-            raise ValueError(f"{len(subtasks)} subtasks generated. Need exactly {self.num_agents}.")
+        
+        # if len(subtasks) != self.num_agents:
+        #     raise ValueError(f"{len(subtasks)} subtasks generated. Need exactly {self.num_agents}.")
 
         # Step 2: Execute each subtask independently
         all_subtask_results = []
         for i, subtask in enumerate(subtasks):
-            print(f"Processing subtask {i+1}/{self.num_agents}: {subtask}")
-            messages = [SystemMessage("You are a helpful assistant.  You need to generate complete code. Use ``` to wrap the code."), HumanMessage(subtask)]
+            # print(f"Processing subtask {i+1}/{self.num_agents}: {subtask}")
+            messages = [SystemMessage("You are a helpful assistant.  You need to generate complete code. And notice that you are allowed to use only one code block in markdown format. Do not use any other format."), HumanMessage(subtask)]
             response = self.llm.invoke(messages)
-            self._update_cost(messages, response)
+            self._update_cost(messages, response.content)
             all_subtask_results.append(f"SUBTASK {i+1}:\n{response.content}")
 
         # Step 3: Merge results into a final answer
         merge_prompt = self.system_merge_prompt.format(results='\n\n'.join(all_subtask_results), task=query)
         messages = [
-            SystemMessage("You are a helpful assistant. You need to generate complete code. Use ``` to wrap the code.\""),
+            SystemMessage("""You are a helpful assistant. You need to explain the main idea and generate complete code based on the previously generated subtask code. And notice that you are allowed to use only one code block in markdown format. Do not use any other format. 
+            """),
             HumanMessage(merge_prompt)
         ]
         final_response = self.llm.invoke(messages)
-        self._update_cost(messages, final_response)
+        self._update_cost(messages, final_response.content)
 
         return final_response
 
 
 if __name__ == "__main__":
     ensemble_node = EnsembleOperator(model="gpt-4o", temperature=0.5, num_agents=1)
+    # test = ensemble_node.llm.invoke(
+    #     [
+    #         HumanMessage(
+    #             "give me a mqtt-based RIOT application."
+    #         )
+    #     ]
+    # )
     res = ensemble_node.run("give me a mqtt-based RIOT application.")
     print(res)
     code_block = extract_module_code(res)

@@ -12,7 +12,7 @@ class BaseOperator:
     Base class for all operators. 
     """
 
-    def __init__(self, model: str, temperature: float = 0.5, ):
+    def __init__(self, model: str, temperature: float = 0.5, **kwargs):
         self.model = model
         self.temperature = temperature
         self._cost = {"input_token": 0, "output_tokens": 0, "time": 0}
@@ -50,12 +50,16 @@ class BaseOperator:
         Return the response in text format.
         """
         start_time = time.time()
-        response = self._run(query)
+        try:
+            response = self._run(query)
+        except Exception as e:
+            print(f"Error occurred during execution: {e}")
+            return None
         end_time = time.time()
         self._cost["time"] += end_time - start_time
         response = response.content
-        response_format = extract_module_code(response)
-        return response_format  
+        # response_format = extract_module_code(response)
+        return response
     def get_llm(self, model: str, temperature: float = 0)->Union[ChatOpenAI,None]:
         if model not in CANDIATE_MODEL:
             raise ValueError(f"Model {model} is not supported. Supported models are: {CANDIATE_MODEL}")

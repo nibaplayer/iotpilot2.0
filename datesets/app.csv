@@ -118,7 +118,7 @@ Detection accuracy: 0.90
 * Remarks *
 - I have extracted the file to a folder.
 - The program should be directly executed."""""""
-ControlLED,"Build a LED ThingModule that can interact with a physical LED device (which is connected to a Raspberry Pi), including turning the LED on/off, controling the color and brightness. You shoud use Python."
+ControlLED,"Build a LED ThingModule that can interact with a physical LED device, including turning the LED on/off, controling the color and brightness. You shoud use Python running on ubuntu host."
 ControlRoom,"Build a Room ThingModule that can collectively control multiple cross-vendor LEDs, including turning the LEDs on/off, controling the color, and brightness. You shoud use Python."
 RecognizeFace,Build a FaceRecog ThingModule that can takes in an image and generates an event if the recognition result matches the predefined labels. The input image is in /root/iotpilotv2/datasets/sensing/shihao.png. You should use Python.
 SensorFusion,"Build a Fusion ThingModule that takes in data from an IMU ThingModule and a GNSS ThingModule, performs Kalman filter to fuse these data, and generates the fusion results. You should use Python."
