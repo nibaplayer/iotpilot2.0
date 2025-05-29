@@ -37,3 +37,122 @@ def load_workflow_config(workflow_config_file_path: str) -> dict:
     else:
         raise FileNotFoundError(f"配置文件 '{workflow_config_file_path}' 未找到！")
     return workflow_config
+
+
+import json
+import matplotlib.pyplot as plt
+import networkx as nx
+from matplotlib.patches import Rectangle
+
+def draw_all_individuals_topology(generation_results, evolution_dir, generation):
+    
+    """
+    绘制每个 individual 的 workflow_topology，每个 individual 单独作为一个 subfigure。
+    
+    参数:
+        generation_results (dict): 包含个体结果的数据，格式为 {"individual_0": {...}, ...}
+        evolution_dir (str): 保存图像的目录路径
+        generation (int): 当前代数，用于命名输出文件
+    """
+    individuals = {k: v for k, v in generation_results.items() if k.startswith("individual_")}
+    num_individuals = len(individuals)
+
+    # 创建画布和子图
+    max_cols = 5
+    num_individuals = len(individuals)
+
+    # 自动计算行数和列数
+    nrows = (num_individuals + max_cols - 1) // max_cols
+    ncols = min(max_cols, num_individuals)
+
+    figsize_width = ncols * 4
+    figsize_height = nrows * 4
+    fig, axes = plt.subplots(nrows, ncols, figsize=(figsize_width, figsize_height))
+    if num_individuals == 1:
+        axes = [axes]  # 确保 axes 是列表以便后续迭代
+    else:
+        axes = axes.flatten().tolist()  # 将多维数组展平为一维列表
+
+    # 定义不同 operator 类型的颜色映射
+    color_map = {
+        "cot": "lightblue",
+        "cotsc": "lightgreen",
+        "reflexion": "lightcoral",
+        "debate": "lightskyblue",
+        "ensemble": "lightyellow"
+    }
+
+    for idx, (individual_name, individual_data) in enumerate(individuals.items()):
+        ax = axes[idx]
+        topo = individual_data.get('motion_sensor_80', {}).get('workflow_topology', {})
+        cost_info = individual_data.get('motion_sensor_80', {}).get('total_cost_info', {})
+
+
+        G = nx.DiGraph()
+        edge_list = []
+
+        for node, info in topo.items():
+            if node == "end":
+                continue
+
+            op_type = info["type"]
+            params = info["params"]
+
+            filtered_params = {k: v for k, v in params.items() if k != "temperature"}
+            node_color = color_map.get(op_type, "lightgray")
+
+            clean_node_name = node.replace("op", "")
+            label = f"{op_type}\n{json.dumps(filtered_params, indent=1)}"
+            G.add_node(clean_node_name, label=label, color=node_color)
+
+            for next_node in info.get("next", []):
+                if next_node != "end":
+                    clean_next_node_name = next_node.replace("op", "")
+                    edge_list.append((clean_node_name, clean_next_node_name))
+
+        for src, dst in edge_list:
+            G.add_edge(src, dst)
+
+        from networkx.drawing.nx_agraph import to_agraph
+
+        A = to_agraph(G)
+        A.layout(prog='dot')
+        pos = {}
+        for node in A.nodes():
+            if hasattr(node, 'attr') and 'pos' in node.attr:
+                x, y = map(float, node.attr['pos'].split(','))
+                pos[node] = (x, y)
+        labels = nx.get_node_attributes(G, 'label')
+        for node in G.nodes:
+            if 'color' not in G.nodes[node]:
+                G.nodes[node]['color'] = "lightgray"
+        colors = [G.nodes[node]['color'] for node in G.nodes]
+
+        # 绘图
+        if pos:
+            nx.draw(G, pos, with_labels=True, labels=labels,
+                    node_size=1500, node_color=colors, font_size=5,
+                    font_weight="bold", arrows=True, alpha=0.9, ax=ax)
+
+        input_tk = cost_info.get("input_token", "N/A")
+        output_tk = cost_info.get("output_token", "N/A")
+        time_cost = cost_info.get("time", "N/A")
+
+        ax.set_title(
+            f"{individual_name}\n"
+            f"Input: {input_tk}, Output: {output_tk}\n"
+            f"Time: {time_cost}",
+            fontsize=10, pad=20
+        )
+
+        ax.axis('on')
+
+    # 自动调整子图间距
+    plt.tight_layout()
+    # plt.subplots_adjust(wspace=0.)  # 可选：微调子图间距
+
+    # 保存图像
+    os.makedirs(evolution_dir, exist_ok=True)
+    save_topology = os.path.join(evolution_dir, f"topology_{generation + 1}.pdf")
+    plt.savefig(save_topology, format='pdf', bbox_inches='tight')
+    plt.close(fig)

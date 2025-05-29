@@ -7,7 +7,7 @@ import numpy as np
 from Operator import cot, cotsc, reflexion, debate, ensemble, reviewer
 import random
 import networkx as nx
-from utils import load_workflow_config, extract_module_code, get_llm
+from utils import load_workflow_config, extract_module_code, get_llm, draw_all_individuals_topology
 from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
 from multiprocessing import Pool 
 import copy
@@ -223,7 +223,7 @@ def execute_single_run(args):
     print(f"Process {i} will start after {delay:.2f} seconds.")
     time.sleep(delay)
 
-    # 子进程中重建 workflow
+    # 子进程中实例化 workflow
     local_workflow = build_workflow_with_config(workflow_config)
 
     executed = set()
@@ -303,6 +303,7 @@ def execute_single_run(args):
     
 def run_workflow(workflow, code_name, problem, run_iters, iter_num=1, method="chatiot"):
     
+    run_iters = 1
     results_dir = f"./results/{code_name}/{method}/{iter_num}"
     output_dir = f"./results/{code_name}/{method}/{iter_num}/output"
     os.makedirs(results_dir, exist_ok=True)
@@ -326,12 +327,18 @@ def run_workflow(workflow, code_name, problem, run_iters, iter_num=1, method="ch
         } for name, node in workflow.items()
     }
 
-    args_list = [(process_id, workflow_config, problem, code_name, method, iter_num) for process_id in range(run_iters)]
+    # 并行评估代码成功率
+    # args_list = [(process_id, workflow_config, problem, code_name, method, iter_num) for process_id in range(run_iters)]
+    # with Pool(processes=run_iters) as pool:
+    #     results_list = pool.map(execute_single_run, args_list)
+    #     pool.close()
+    #     pool.join()
     
-    with Pool(processes=run_iters) as pool:
-        results_list = pool.map(execute_single_run, args_list)
-        pool.close()
-        pool.join()
+    #禁用并行，防止和进化算个体并行评估的冲突
+    results_list = []
+    for process_id in range(run_iters):
+        result = execute_single_run((process_id, workflow_config, problem, code_name, method, iter_num))
+        results_list.append(result)
 
     app_type = detect_task_type(problem)
 
@@ -499,8 +506,32 @@ def LLM_meta_search_for_each(benchmark_tasks, max_iters=10):
         
     if not workflow_configs:
         raise ValueError("No valid workflow configurations were generated.")
+
+def evaluate_individual(args):
+    """
+    单个个体的评估函数，用于并行执行。
+    """
+    individual, code_name, problem, method, generation_idx, individual_idx, population_size = args
     
-def genetic_search_for_each(benchmark_tasks, max_iters=1):
+    temp_config_dir = f"./results/{method}"
+    os.makedirs(temp_config_dir, exist_ok=True)
+    temp_config_path = os.path.join(temp_config_dir, f"temp_individual_{generation_idx}_{individual_idx}.json")
+    
+    results = []
+    try:
+        with open(temp_config_path, "w") as f:
+            json.dump({"temp_config": individual}, f, indent=4)
+
+        workflow_config = load_workflow_config(temp_config_path)["temp_config"]
+        workflow = build_workflow_with_config(workflow_config)
+
+        results = run_workflow(workflow, code_name, problem, 5, generation_idx * population_size + individual_idx + 1, method="genetic")
+        
+        return results 
+    except Exception as e:
+        print(f"Error evaluating individual {individual_idx}: {e}")
+        return results  
+def genetic_search_for_each(benchmark_tasks, max_iters=20):
     """
     Genetic algorithm to evolve workflow configurations with objectives:
     - Minimize token cost and time
@@ -513,11 +544,11 @@ def genetic_search_for_each(benchmark_tasks, max_iters=1):
     Returns:
         dict: The best workflow configuration found.
     """
-    population_size = 8
+    population_size = 5
     mutation_rate = 0.2
-    tournament_size = 3
-    elite_size = 2
-    max_operators = 3 
+    tournament_size = 2
+    elite_size = 1
+    max_operators = 3
     method = "genetic"
 
     search_space = create_operator_search_space()
@@ -561,56 +592,49 @@ def genetic_search_for_each(benchmark_tasks, max_iters=1):
         
         if code_name not in benchmark_tasks:
             continue
-
-        for generation in range(1, max_iters):
+        
+        generation_results = {} 
+        
+        for generation in range(0, max_iters):
             print(f"\n--- Generation {generation + 1} ---")
 
             # Evaluate fitness
             fitness_scores = []
-            generation_results = {} 
             
-            for idx, individual in enumerate(population):
-                print(f"Evaluating individual {idx + 1}")
+            args_list = [(individual, code_name, problem, method, generation, individual_idx, population_size) for individual_idx, individual in enumerate(population)]
+            with Pool(processes=population_size) as pool:
+                results_list = pool.map(evaluate_individual, args_list)
+                pool.close()
+                pool.join()
+
+            for idx, results in enumerate(results_list):
+                if not results: 
+                    print(f"⚠️ No results for individual {idx} in generation {generation + 1}")
+                    continue
+                task_results = {}
+                total_reward = 0
+                count = 0
+                        
+                reward, _, _, _ = get_multi_objective_rewards(results, code_name)
                 
-                temp_config_dir = f"./results/{method}"
-                os.makedirs(temp_config_dir, exist_ok=True)
-                temp_config_path = os.path.join(temp_config_dir, f"temp_individual_{idx}.json")
-                with open(temp_config_path, "w") as f:
-                    json.dump({"temp_config": individual}, f, indent=4)
+                task_results[code_name] = results[code_name]
+                total_reward += reward
+                count += 1
 
-                try:
-                    workflow_config = load_workflow_config(temp_config_path)["temp_config"]
-                    workflow = build_workflow_with_config(workflow_config)
+                avg_reward = total_reward / count if count > 0 else total_reward
+                fitness_scores.append(avg_reward)
 
-                    task_results = {}
-                    total_reward = 0
-                    count = 0
+                if avg_reward > best_reward:
+                    best_reward = avg_reward
+                    best_config = population[idx]
                         
-                    results = run_workflow(workflow, code_name, problem, 10, generation * population_size + idx + 1, method="genetic")
-                    reward, _, _, _ = get_multi_objective_rewards(results, code_name)
-                    
-                    task_results[code_name] = results[code_name]
-                    total_reward += reward
-                    count += 1
-
-                    avg_reward = total_reward / count if count > 0 else total_reward
-                    fitness_scores.append(avg_reward)
-
-                    if avg_reward > best_reward:
-                        best_reward = avg_reward
-                        best_config = individual
-                        
-                    task_results[code_name]['reward'] = avg_reward
-                    generation_results[f"individual_{idx}"] = task_results
-
-                except Exception as e:
-                    print(f"Error evaluating individual {idx}: {e}")
-                    fitness_scores.append(float('-inf'))
-                    generation_results[f"individual_{idx}"] = {"error": str(e)}
-                    
+                task_results[code_name]['reward'] = avg_reward
+                generation_results[f"individual_{generation * population_size + idx + 1}"] = task_results
+                 
             print("Fitness scores:", fitness_scores)
             # Save generation results
             evolution_dir = f"./results/{code_name}/{method}"
+            draw_all_individuals_topology(generation_results, evolution_dir, 0)  
             os.makedirs(evolution_dir, exist_ok=True)
             gen_log_path = os.path.join(evolution_dir, f"generation_{generation + 1}.json")
             with open(gen_log_path, "w", encoding="utf-8") as f:
@@ -694,6 +718,7 @@ def get_multi_objective_rewards(data, code_name):
     """
     Calculate rewards based on the results of the workflow execution.
     """
+    
     app_type = data[code_name]["app_type"]
     cost_info = data[code_name]["total_cost_info"]
     final_outputs = data[code_name]["final_outputs"]
@@ -737,6 +762,7 @@ def evaluate_code_quality(app_type, output_text):
             return 0
     
     if app_type == "RIOT":
+        
         from config import RIOT_ROOT
         workplace = os.path.join(RIOT_ROOT,'examples','LLM_Gen')
         filepath = os.path.join(RIOT_ROOT,'examples','LLM_Gen','main.c')
@@ -815,17 +841,19 @@ def evaluate_code_quality(app_type, output_text):
             except:
                 pass
             return 0
-        
     
 def main():
 
     # Create search space
+    
     search_space = create_operator_search_space()
+    
     print("Search space defined:", search_space)
     
     # run_predefined_workflow_config("workflow_config.json", benchmark, "IoTPilot")
     
     # LLM_meta_search_for_each(benchmark, 10)
+    
     genetic_search_for_each(benchmark, 10)
     
 

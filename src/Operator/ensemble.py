@@ -99,7 +99,7 @@ class EnsembleOperator(BaseOperator):
         # Step 3: Merge results into a final answer
         merge_prompt = self.system_merge_prompt.format(results='\n\n'.join(all_subtask_results), task=query)
         messages = [
-            SystemMessage("""You are a helpful assistant. You need to explain the main idea and generate complete code based on the previously generated subtask code. And notice that you are allowed to use only one code block in markdown format. Do not use any other format. 
+            SystemMessage("""You are a helpful assistant. You need to explain the main idea and generate complete code or TAP code based on the previously generated subtask code. And notice that you are allowed to use only one code block in markdown format. Do not use any other format. 
             """),
             HumanMessage(merge_prompt)
         ]

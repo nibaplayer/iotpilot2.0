@@ -56,11 +56,10 @@ class Reviewer(BaseOperator):
             """
             human_prompt = f"""
             I have a task where I asked you to generate code based on my requirements. You provided a code solution, which I then executed and obtained some results. Now, I would like you to:
-
-1. Review the code you generated based on the execution results
-2. Identify any issues or inefficiencies in the code
-3. Explain what worked well and what didn't work as expected
-4. Provide a corrected and improved version of the code that addresses any problems found
+            1. Review the code you generated based on the execution results
+            2. Identify any issues or inefficiencies in the code
+            3. Explain what worked well and what didn't work as expected
+            4. Provide a corrected and improved version of the code that addresses any problems found
             Here is the original task and code:
             {query}
 
@@ -101,16 +100,16 @@ class Reviewer(BaseOperator):
             """
             human_prompt = f"""
             I have a task where I asked you to generate RIOT-OS code based on my requirements. You provided a code solution, which I then executed and obtained some results. Now, I would like you to:
-1. Review the RIOT-OS code you generated based on the execution results
-2. Identify any issues or inefficiencies in the code
-3. Explain what worked well and what didn't work as expected
-4. Suggest improvements or optimizations to the code
+            1. Review the RIOT-OS code you generated based on the execution results
+            2. Identify any issues or inefficiencies in the code
+            3. Explain what worked well and what didn't work as expected
+            4. Suggest improvements or optimizations to the code
             Here is the original task and code:
             {query}
             Here is the execution result:
             {result}
             Please provide your review in a concise manner. In the end, please also provide a corrected version of the code.
-"""
+            """
             messages = [SystemMessage(system_prompt), HumanMessage(human_prompt)]
             response = self.llm.invoke(messages)
             self._update_cost(messages,response.content)
@@ -293,11 +292,13 @@ class Executor():
                 return "IFTTT JSON is valid and contains all required fields (Thought, Say_to_user, Action_type). Please review the content to determine if it satisfies the specific task requirements."
 
 if __name__ == "__main__":
+    
     # node = Reviewer(model="gpt-4o", temperature=0.5)
     # res =  node.run("Given a list of integers, find the maximum product of any two distinct integers in the list.")
     # code = """#include <stdio.h>\nint main()\n{\n    printf("s");\n}"""
     # res = Executor.riot_executor(code)
     # print(res)
+    
     json_pattern = re.compile(r'({[\s\S]*})')
     test_json = json_pattern.search("""
     {

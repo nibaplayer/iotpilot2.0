@@ -4,3 +4,4 @@ from .cotsc import CoTSC
 from .reflexion import Reflexion
 from .ensemble import EnsembleOperator
 from .debate import DebateOperator
+from .retrieval import Retrieval
