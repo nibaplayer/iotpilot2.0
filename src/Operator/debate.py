@@ -17,15 +17,15 @@ class DebateOperator(BaseOperator):
         num_agents (int): Number of agents to work on subtasks.
     """
 
-    def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 2, **kwargs):
-        super().__init__(model=model, temperature=temperature, **kwargs)
+    def __init__(self, model: str, temperature: float = 0.5, num_agents: int = 2, topk: int=3, **kwargs):
+        super().__init__(model=model, temperature=temperature, topk=topk, **kwargs)
         self.num_agents = num_agents
         self.llm = self.get_llm(model, temperature=temperature)
         
         # Instructions for debate process
         self.debate_initial_instruction = "Please think step by step and then solve the task. Use ``` to wrap code."
         self.debate_instruction = "Given solutions to the problem from other agents, consider their opinions as additional advice. Please think carefully and provide an updated answer. Use ``` to wrap code."
-        self.final_decision_instruction = "Given all the above thinking and answers, reason over them carefully and provide a final answer. You should generate the complete code. Use ``` to wrap code."
+        self.final_decision_instruction = "Given all the above thinking and answers, reason over them carefully and provide a final answer. Use ``` to wrap code."
         # Define default agent roles
         self.default_roles = ['Network Expert', 'Sensor Expert']
     def _run(self, query=None):
@@ -34,6 +34,11 @@ class DebateOperator(BaseOperator):
         """
         if query is None:
             raise ValueError("No input provided. Please provide a query/task.")
+        
+        if self.topk > 0:
+            response = self.retrieval_run(query, self.topk)
+            query += f"Here is the reference code: " + str(response)
+            
 
         # Initialize debate agents with different roles and a moderate temperature for varied reasoning
         debate_agents = [self.get_llm(self.model, temperature=0.8) for _ in range(self.num_agents)]
@@ -57,9 +62,9 @@ class DebateOperator(BaseOperator):
                         HumanMessage(query)
                     ]
                     response = debate_agents[i].invoke(messages)
-                    self._update_cost(messages, response.content)
-                    thinking = response.content
-                    answer = response.content
+                    self._update_cost(messages, response.content if isinstance(response, BaseMessage) else response)
+                    thinking = response.content if isinstance(response, BaseMessage) else response
+                    answer =response.content if isinstance(response, BaseMessage) else response
                     # print(f"[DEBUG] Agent '{agent_roles[i]}' completed initial reasoning.")
                 else:
                     # print(f"[DEBUG] Agent '{agent_roles[i]}' updating solution based on peers' feedback.")
@@ -71,9 +76,9 @@ class DebateOperator(BaseOperator):
                         HumanMessage(context_str)
                     ]
                     response = debate_agents[i].invoke(messages)
-                    self._update_cost(messages, response.content)
-                    thinking = response.content
-                    answer = response.content
+                    self._update_cost(messages, response.content if isinstance(response, BaseMessage) else response)
+                    thinking = response.content if isinstance(response, BaseMessage) else response
+                    answer = response.content if isinstance(response, BaseMessage) else response
                     print(f"[DEBUG] Agent '{agent_roles[i]}' completed updated solution.")
                     
                 all_thinking[r].append(thinking)
@@ -86,11 +91,11 @@ class DebateOperator(BaseOperator):
         final_input_str = "\n".join(final_input)
         
         messages = [
-            SystemMessage("You are a helpful assistant. " + self.final_decision_instruction),
-            HumanMessage(final_input_str)
+            SystemMessage("You are a helpful assistant. " + self.final_decision_instruction + ".You must wrap the final answer with ```."),
+            HumanMessage(final_input_str + ".You must wrap the final answer with ```.")
         ]
         final_response = self.llm.invoke(messages)
-        self._update_cost(messages, response.content)
+        self._update_cost(messages, response.content if isinstance(response, BaseMessage) else response)
 
         cost = self.get_cost()
         

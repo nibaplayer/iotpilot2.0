@@ -11,69 +11,53 @@ class Retrieval(BaseOperator):
     """
     Retrieval Operator that retrieves relevant information from a knowledge base
     """
-    def __init__(self,model: str,temperature: float=0.5, **kwargs):
-        super().__init__(model=model, temperature=temperature, **kwargs)
-        self.cot_llm = self.get_llm(model, temperature=0.7)
-        self.final_llm = self.get_llm(model, temperature=0.1)
-        self.system_cot_prompt = f"""
-                                You are a programming assistant that solves problems step by step.
-                                When solving programming problems:
-                                1. First, understand what the problem is asking for
-                                2. Consider the inputs, expected outputs, and constraints
-                                3. Break the problem down into smaller components
-                                4. Write the outline of your approach
-                                5. Briefly explain key parts of your approach\n
-                                """
-        self.system_final_prompt = f"""
-                                Given all the above solutions, reason over them carefully and provide a final answer.
-                                """
-        self.N = N  # Number of reasoning paths to generate
+    def __init__(self,model: str, temperature: float=0.5,  topK:int=3,**kwargs):
+        super().__init__(model, temperature, **kwargs)
+        if model != "bge-m3":
+            raise ValueError("Retrieval Operator only supports bge-m3 model.")
+        if topK <= 0:
+            raise ValueError("topK must be a positive integer.")
+        # self.embedding_model = self.get_llm(model)
+        self.topK = topK
+        self.mission_type = "RIOT"  # Default mission type, can be changed as needed
+        try:
+            self.client = self.get_llm(model)
+            self.collection = self.client.get_collection(
+                name=self.mission_type+"_embedding",
+                embedding_function=ImprovedEmbeddingFunction(model_name=model)
+                )
+        except Exception as e:
+            raise ValueError(f"Failed to connect to the ChromaDB collection: {e}")
     def _run(self, query=None):
         """
-        Run the Chain of Thought reasoning process with Self Consistency on the input query.
-        Generate N different responses with higher temperature and select the most consistent one.
+        RAG
         """
-        input_text = query
-        if input_text is None:
-            raise ValueError("No input provided. Please provide input during initialization or in the run method.")
+        response =  self.collection.query(
+            query_texts=query,
+            n_results=self.topK,
+        )
+
+        return str(response)
+
+import logging
+from chromadb import Documents, EmbeddingFunction, Embeddings
+from langchain_ollama import OllamaEmbeddings 
+class ImprovedEmbeddingFunction(EmbeddingFunction):
+    def __init__(self, model_name: str = "bge-m3"):
+        self.embed_model = OllamaEmbeddings(model=model_name)
         
-        user_query = f"Here is the problem: {input_text}. Please provide a step-by-step reasoning process to solve the problem."
-        
-        all_responses = []
-        solution_content = ""
-        # Generate N different responses with the same prompt but different temperature
-        for i in range(self.N):
-            # Adjust temperature for diversity in reasoning paths
-            temp_llm = self.get_llm(model="gpt-4o", temperature=0.7)
-            messages = [SystemMessage(self.system_cot_prompt), HumanMessage(user_query)]
-            response = temp_llm.invoke(messages)
-            all_responses.append(response)
-            self._update_cost(messages, response.content)
-            solution_content += f"SOLUTION {i+1}:\n{response.content}\n"
-        # Synthesize a final answer using all collected responses
-        synthesis_prompt = f"""
-                            I have generated {self.N} different solutions to this problem using chain-of-thought reasoning.
-                            Here are all the solutions:
-
-                            {solution_content}
-
-                            Please carefully analyze all these solutions. Identify the most common elements, correct any mistakes, 
-                            and synthesize a final, accurate solution to the original problem:
-
-                            {input_text}
-
-                            Provide a clear, step-by-step reasoning process for this final solution.
-                            """
-        # Use a lower temperature for the final synthesis to ensure stability
-        final_llm = self.final_llm
-        messages = [SystemMessage(self.system_final_prompt), HumanMessage(synthesis_prompt)]
-        final_response = final_llm.invoke(messages)
-        self._update_cost(messages, final_response.content)
-        return final_response
-     
+    def __call__(self, input: Documents) -> Embeddings:
+        try:
+            return self.embed_model.embed_documents(input)
+        except Exception as e:
+            logging.error(f"嵌入计算失败: {str(e)}")
+            # 返回零向量作为fallback
+            return [[0.0] * 1024 for _ in input]  # 假设向量维度为1024   
 
 
 if __name__ == "__main__":
-    node = CoTSC(model="gpt-4o", temperature=0.5, N=3)
-    res = node.run("Given a list of integers, find the maximum product of any two distinct integers in the list.")
-    print(node.get_cost())
+    node = Retrieval(model="bge-m3", mission_type="RIOT", topK=3)
+    response = node.run(query="""
+    I need to develop RIOT code on an ESP32, which sends a CoAP request to an COAP server. The program is configured to send CoAP POST requests "Hello, COAP Cloud" to the COAP server at IP address "47.102.103.1" and port 5683, with the URI path "/coap/test".
+""")
+    print(response)

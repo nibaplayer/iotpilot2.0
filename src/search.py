@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pandas as pd
 import json
 import numpy as np
-from Operator import cot, cotsc, reflexion, debate, ensemble, reviewer
+from Operator import cot, cotsc, reflexion, debate, ensemble, reviewer, retrieval
 import random
 import networkx as nx
 from utils import load_workflow_config, extract_module_code, get_llm, draw_all_individuals_topology
@@ -15,15 +15,23 @@ import time
 import threading
 
 
-# Define benchmark tasks
-benchmark =[
-    "motion_sensor_80",
-    # "ControlRoom",
-    # "RIOT_DHT11"
-]
 
-# Load dataset
-data = pd.read_csv("/home/hao/code/iotpilot2.0/datesets/app.csv")
+
+task_type = "embeddedos"  
+
+if task_type == "IFTTT":
+    file_path = "/home/hao/code/iotpilot2.0/datesets/IFTTT/wrapped_tap.csv"
+    data = pd.read_csv(file_path, skiprows=range(1, 2))
+    first_column = data.columns[0]
+    benchmark = data[first_column].tolist()[0:]
+elif task_type == "embeddedos":
+    file_path = "/home/hao/code/iotpilot2.0/datesets/embeddedos/os.csv"
+    data = pd.read_csv(file_path)
+    first_column = data.columns[0]
+    benchmark = data[first_column].tolist()[0:]
+    
+print(benchmark)
+
 
 def create_operator_search_space():
     """
@@ -32,29 +40,44 @@ def create_operator_search_space():
     """
     search_space = {
         "cot": {
-            "model": ["gpt-4o", "gpt-4o-mini"],
-            "temperature": [0,1]
+            "model": ["gpt-4o", "gpt-4o-mini", "deepseek-r1:7b", "deepseek-r1:1.5b"],
+            "temperature": [0,1],
+            "topk": [i for i in range(0, 10)]
         },
         "cotsc": {
-            "model": ["gpt-4o", "gpt-4o-mini"],
+            "model": ["gpt-4o", "gpt-4o-mini", "deepseek-r1:7b", "deepseek-r1:1.5b"],
             "temperature": [0,1],
-            "N": [1, 5]  # Different numbers of reasoning paths
+            "N": [i for i in range(1, 5)],  # Different numbers of reasoning paths
+            "topk": [i for i in range(0, 10)]
         },
         "reflexion": {
-            "model": ["gpt-4o", "gpt-4o-mini"],
+            "model": ["gpt-4o", "gpt-4o-mini", "deepseek-r1:7b", "deepseek-r1:1.5b"],
             "temperature": [0,1],
-            "max_iterations": [1, 5]  # Different numbers of iterations
+            "max_iterations": [i for i in range(1, 5)],  # Different numbers of iterations
+            "topk": [i for i in range(0, 10)]
         },
         "debate": {
-            "model": ["gpt-4o", "gpt-4o-mini"],
+            "model": ["gpt-4o", "gpt-4o-mini", "deepseek-r1:7b", "deepseek-r1:1.5b"],
             "temperature": [0,1],
-            "num_agents": [1, 2]  # Different numbers of agents
+            "num_agents": [1, 2],  # Different numbers of agents
+            "topk": [i for i in range(0, 10)]
         },
         "ensemble": {
-            "model": ["gpt-4o", "gpt-4o-mini"],
+            "model": ["gpt-4o", "gpt-4o-mini", "deepseek-r1:7b", "deepseek-r1:1.5b"],
             "temperature": [0,1],
-            "num_agents": [1, 5]  # Different numbers of subtask agents
-        }
+            "num_agents": [i for i in range(1, 5)], # Different numbers of subtask agents
+            "topk": [i for i in range(0, 10)]
+        },
+        # "retrieval": {
+        #     "model": ["bge-m3"],
+        #     "temperature": [0,1],
+        #     "topK": [1, 3],
+        # },
+        # "reviewer": {
+        #     "model": ["gpt-4o", "gpt-4o-mini", "deepseek-r1:7b", "deepseek-r1:1.5b"],
+        #     "temperature": [0,1],
+        #     "topk": [1,10]
+        # }
     }
     return search_space
 
@@ -63,11 +86,11 @@ def initialize_operators():
     Build a collection of operators by instantiating various operator types.
     """
     operators = {
-        "cot": cot.CoT(model="gpt-4o", temperature=0.5),
-        "cotsc": cotsc.CoTSC(model="gpt-4o", temperature=0.5, N=3),
-        "reflexion": reflexion.Reflexion(model="gpt-4o", temperature=0.5, max_iterations=2),
-        "debate": debate.DebateOperator(model="gpt-4o", temperature=0.5, num_agents=2),
-        "ensemble": ensemble.EnsembleOperator(model="gpt-4o", temperature=0.5, num_agents=2)
+        "cot": cot.CoT(model="gpt-4o", temperature=0.5, topk=3),
+        "cotsc": cotsc.CoTSC(model="gpt-4o", temperature=0.5, N=3, topk=3),
+        "reflexion": reflexion.Reflexion(model="gpt-4o", temperature=0.5, max_iterations=2, topk=3),
+        "debate": debate.DebateOperator(model="gpt-4o", temperature=0.5, num_agents=2, topk=3),
+        "ensemble": ensemble.EnsembleOperator(model="gpt-4o", temperature=0.5, num_agents=2, topk=3)
     }
     return operators
 
@@ -153,6 +176,8 @@ def build_workflow_with_config(workflow_config):
             instance = ensemble.EnsembleOperator(**selected_params)
         elif op_type == "reviewer":
             instance = reviewer.Reviewer(**selected_params)
+        elif op_type == "retrieval":
+            instance = retrieval.Retrieval(**selected_params)
         else:
             raise ValueError(f"未知 operator 类型: {op_type}")
 
@@ -238,7 +263,7 @@ def execute_single_run(args):
             return
         node = local_workflow[node_name]
         executed.add(node_name)
-
+        
         response = node["instance"].run(input_data)
         print(f"Run {node_name} with params: {node['params']} end")
         
@@ -276,13 +301,14 @@ def execute_single_run(args):
     for name, node in local_workflow.items():
         if "end" in node.get("next", []):
             outputs = node.get("outputs", [])
-            if outputs:
+            if outputs and extract_module_code(outputs):
                 final_outputs = extract_module_code(outputs)[-1]
             else:
                 final_outputs = f"Warning: Node '{name}' has no outputs."
+                print(final_outputs)
             break
 
-    code_quality = evaluate_code_quality(app_type, final_outputs)
+    code_quality = evaluate_code_quality(app_type, final_outputs, code_name)
     output_dir=f"./results/{code_name}/{method}/{iter_num}/output"
     output_file_path = os.path.join(output_dir, f"{i}_final_outputs.txt")
     with open(output_file_path, "w", encoding="utf-8") as f :
@@ -544,9 +570,9 @@ def genetic_search_for_each(benchmark_tasks, max_iters=20):
     Returns:
         dict: The best workflow configuration found.
     """
-    population_size = 5
-    mutation_rate = 0.2
-    tournament_size = 2
+    population_size = 10
+    mutation_rate = 0.5
+    tournament_size = 6
     elite_size = 1
     max_operators = 3
     method = "genetic"
@@ -582,14 +608,13 @@ def genetic_search_for_each(benchmark_tasks, max_iters=20):
         
         return config
 
-    # Initialize population
-    population = [generate_random_workflow() for _ in range(population_size)]
-
-    best_config = None
-    best_reward = float('-inf')
-    
     for code_name, problem in zip(data['code_name'], data["problem"]):
         
+        # Initialize population
+        population = [generate_random_workflow() for _ in range(population_size)]
+        best_config = None
+        best_reward = float('-inf')
+
         if code_name not in benchmark_tasks:
             continue
         
@@ -610,6 +635,7 @@ def genetic_search_for_each(benchmark_tasks, max_iters=20):
             for idx, results in enumerate(results_list):
                 if not results: 
                     print(f"⚠️ No results for individual {idx} in generation {generation + 1}")
+                    fitness_scores.append(random.uniform(-200000, -100000))
                     continue
                 task_results = {}
                 total_reward = 0
@@ -634,7 +660,7 @@ def genetic_search_for_each(benchmark_tasks, max_iters=20):
             print("Fitness scores:", fitness_scores)
             # Save generation results
             evolution_dir = f"./results/{code_name}/{method}"
-            draw_all_individuals_topology(generation_results, evolution_dir, 0)  
+            draw_all_individuals_topology(code_name, generation_results, evolution_dir, 0)  
             os.makedirs(evolution_dir, exist_ok=True)
             gen_log_path = os.path.join(evolution_dir, f"generation_{generation + 1}.json")
             with open(gen_log_path, "w", encoding="utf-8") as f:
@@ -729,68 +755,39 @@ def get_multi_objective_rewards(data, code_name):
 
     
     rewards = {
-        "token_cost": input_tokens + output_tokens, 
-        "time_cost":  time_cost,  
+        "inupt_token_cost": input_tokens,
+        "output_token_cost":output_tokens, 
+        "token_cost": input_tokens + output_tokens,
+        "time_cost":  time_cost,
         "code_quality": code_quality 
     }
     
     print(f"Rewards: {rewards}")
     
-    weights = {"token_cost": -0.4, "time_cost": -0.3, "code_quality": 0.3}
+    weights = {"inupt_token_cost": -0.8, "output_token_cost": -0.2}
     
     reward = 0
-    for key in rewards:
+    for key in weights:
         reward += weights[key] * rewards[key]
+    reward = reward * rewards["code_quality"] 
+    if rewards["code_quality"] ==0:
+        reward = -2000000
         
     return reward, rewards["token_cost"], rewards["time_cost"], rewards["code_quality"]
 
-def evaluate_code_quality(app_type, output_text):
+def evaluate_code_quality(app_type, output_text, code_name):
     
     if app_type == "IFTTT":
         try:
-            parsed = json.loads(output_text)
-            
-            required_keys = ["Thought", "Say_to_user", "Action_type"]
+            required_keys = ["trigger", "condition", "action"]
             for key in required_keys:
-                if key not in parsed:
+                if key not in str(output_text):
                     print(f"Missing required key: {key}")
-                    return False, None
+                    return 0
             return 1
     
         except json.JSONDecodeError as e:
             print(f"Invalid IFTTT format: {e}")
-            return 0
-    
-    if app_type == "RIOT":
-        
-        from config import RIOT_ROOT
-        workplace = os.path.join(RIOT_ROOT,'examples','LLM_Gen')
-        filepath = os.path.join(RIOT_ROOT,'examples','LLM_Gen','main.c')
-        # Write the code to the file
-        try:
-            with open(filepath,'w') as f:
-                f.write(output_text)
-        except Exception as e:
-            return 0
-        
-        import subprocess
-
-        try:
-            process = subprocess.Popen(
-                ["make"],
-                cwd=workplace,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                shell=True
-            )
-            stdout, stderr = process.communicate(timeout=120)
-            # Return the execution result 
-            if stderr:
-                return 0
-            else:
-                return 1
-        except subprocess.TimeoutExpired:
             return 0
     
     if app_type == "Python_executer":
@@ -842,6 +839,208 @@ def evaluate_code_quality(app_type, output_text):
                 pass
             return 0
     
+    if app_type == "RIOT":
+        
+        passrate = -1
+        from config import RIOT_ROOT
+        workplace = os.path.join(RIOT_ROOT,'examples','LLM_Gen')
+        filepath = os.path.join(RIOT_ROOT,'examples','LLM_Gen','main.c')
+        # Write the code to the file
+        try:
+            with open(filepath,'w') as f:
+                f.write(output_text)
+        except Exception as e:
+            return 0
+        
+        import subprocess
+
+        try:
+            process = subprocess.Popen(
+                ["make"],
+                cwd=workplace,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                shell=True
+            )
+            stdout, stderr = process.communicate(timeout=120)
+            # Return the execution result 
+            if stderr:
+                passrate = 0
+            else:
+                passrate = 1
+        except subprocess.TimeoutExpired:
+            passrate = 0
+        
+        headers_RIOT_MQTT = [
+            r'#include\s*[<"]paho_mqtt\.h[>"]',
+            r'#include\s*[<"]MQTTClient\.h[>"]'
+        ]
+        apis_RIOT_MQTT = [
+            r'\bMQTTClient\b',
+            r'\bMQTTMessage\b',
+            r'\bMQTTPacket_connectData\b',
+            r'\bMQTTClientInit\b',
+            r'\bMQTTConnect\b',
+            r'\bMQTTPublish\b'
+        ]
+        headers_RIOT_COAP = [
+            r'#include\s*[<"]net/gcoap\.h[>"]',
+            r'#include\s*[<"]arpa/inet\.h[>"]'
+        ]
+        apis_RIOT_COAP = [
+            r'\bgcoap_req_init\b',
+            r'\binet_pton\b',
+            r'\bgcoap_req_send\b',
+        ]
+        headers_RIOT_MQTT_SN = [
+            r'#include\s*[<"]net/emcute\.h[>"]',
+            r'#include\s*[<"]arpa/inet\.h[>"]'
+        ]
+        apis_RIOT_MQTT_SN  = [
+            r'\bemcute_con\b',
+            r'\bemcute_pub\b',
+            r'\binet_pton\b'
+        ]
+        headers_RIOT_IRQ= [
+             r'#include\s*[<"]arpa/inet\.h[>"]'
+        ]
+        apis_RIOT_IRQ  = [
+            r'\birq_restore\b',
+            r'\birq_disable\b',
+
+        ]
+        headers_RIOT_RTC = [
+            r'#include\s*[<"]periph/rtc\.h[>"]',
+        ]
+        apis_RIOT_RTC  = [
+            r'\brtc_get_time\b',
+            r'\brtc_set_alarm\b',
+        ]
+        headers_RIOT_UDP = [
+            r'#include\s*[<"]sys/socket\.h[>"]',
+            r'#include\s*[<"]arpa/inet\.h[>"]',
+        ]
+        apis_RIOT_UDP  = [
+            r'\binet_pton\b',
+            r'\bsendto\b',
+            r'\bsocket\b',
+        ]
+        headers_RIOT_Thread = [
+            r'#include\s*[<"]thread\.h[>"]',
+        ]
+        apis_RIOT_Thread  = [
+            r'\bthread_create\b',
+            r'\bmsg_send\b',
+            r'\bmsg_receive\b',
+        ]
+        headers_RIOT_Timer = [
+            r'#include\s*[<"]xtimer\.h[>"]',
+            r'#include\s*[<"]periph/gpio\.h[>"]',
+        ]
+        apis_RIOT_Timer  = [
+            r'\btimer_set\b',
+            r'\bgpio_init\b',
+            r'\bgpio_toggle\b',
+        ]
+        headers_RIOT_Flash = [
+            r'#include\s*[<"]nvs_flash\.h[>"]',
+            r'#include\s*[<"]nvs\.h[>"]',
+        ]
+        apis_RIOT_Flash  = [
+            r'\bnvs_commit\b',
+            r'\bnvs_flash_init\b',
+            r'\bnvs_open\b',
+            r'\bnvs_close\b',
+        ]
+        headers_RIOT_MMA = [
+            r'#include\s*[<"]mma8x5x\.h[>"]',
+            r'#include\s*[<"]mma8x5x_params\.h[>"]',
+        ]
+        apis_RIOT_MMA  = [
+            r'\bmma8x5x_read\b',
+            r'\bmma8x5x_init\b',
+        ]
+        headers_RIOT_Event = [
+            r'#include\s*[<"]nevent/periodic_callback\.h[>"]',
+            r'#include\s*[<"]event/thread\.h[>"]',
+        ]
+        apis_RIOT_Event  = [
+            r'\bevent_periodic_callback_init\b',
+            r'\bevent_periodic_callback_start\b',
+        ]
+        headers_RIOT_DHT11 = [
+            r'#include\s*[<"]dht\.h[>"]',
+            r'#include\s*[<"]dht_params\.h[>"]',
+        ]
+        apis_RIOT_DHT11   = [
+            r'\bdht_read\b',
+            r'\bdht_init\b',
+        ]
+        headers_RIOT_Warn = [
+            r'#include\s*[<"]dht\.h[>"]',
+            r'#include\s*[<"]dht_params\.h[>"]',
+            r'#include\s*[<"]periph/gpio\.h[>"]',
+        ]
+        apis_RIOT_Warn  = [
+            r'\dht_read\b',
+            r'\bdht_init\b',
+            r'\bgpio_init\b',
+            r'\bgpio_clear\b',
+            r'\bgpio_set\b',
+        ]
+        headers_RIOT_Sched = [
+            r'#include\s*[<"]sched\.h[>"]',
+        ]
+        apis_RIOT_Sched  = [
+            r'\bthread_create\b',
+            r'\bsched_change_priority\b',
+        ]
+        headers_RIOT_MBOX = [
+            r'#include\s*[<"]mbox\.h[>"]',
+            r'#include\s*[<"]msg\.h[>"]',
+        ]
+        apis_RIOT_MBOX  = [
+            r'\bmbox_get\b',
+            r'\bmbox_init\b',
+            r'\bmbox_put\b',]
+        mapping = {
+            "RIOT_MQTT": (headers_RIOT_MQTT, apis_RIOT_MQTT),
+            "RIOT_COAP": (headers_RIOT_COAP, apis_RIOT_COAP),
+            "RIOT_MQTT_SN": (headers_RIOT_MQTT_SN, apis_RIOT_MQTT_SN),
+            "RIOT_IRQ": (headers_RIOT_IRQ, apis_RIOT_IRQ),
+            "RIOT_RTC": (headers_RIOT_RTC, apis_RIOT_RTC),
+            "RIOT_UDP": (headers_RIOT_UDP, apis_RIOT_UDP),
+            "RIOT_Thread": (headers_RIOT_Thread, apis_RIOT_Thread),
+            "RIOT_Timer": (headers_RIOT_Timer, apis_RIOT_Timer),
+            "RIOT_Flash": (headers_RIOT_Flash, apis_RIOT_Flash),
+            "RIOT_MMA": (headers_RIOT_MMA, apis_RIOT_MMA),
+            "RIOT_Event": (headers_RIOT_Event, apis_RIOT_Event),
+            "RIOT_DHT11": (headers_RIOT_DHT11, apis_RIOT_DHT11),
+            "RIOT_Warn": (headers_RIOT_Warn, apis_RIOT_Warn),
+            "RIOT_Sched": (headers_RIOT_Sched, apis_RIOT_Sched),
+            "RIOT_MBOX": (headers_RIOT_MBOX, apis_RIOT_MBOX),
+        }
+        
+        def count_occurrences(file_content, patterns):
+            """Count occurrences of each pattern in the file content."""
+            import re
+            return {pattern: len(re.findall(pattern, file_content)) for pattern in patterns}
+
+        headers, apis = mapping[str(code_name)]
+        header_counts = count_occurrences(output_text, headers)
+        api_counts = count_occurrences(output_text, apis)
+
+        correct_headers = 0
+        correct_apis = 0
+        for header, count in header_counts.items():
+            if count > 0: correct_headers += 1
+
+        for api, count in api_counts.items():
+            if count > 0: correct_apis += 1
+            
+        print(f"passrate: {passrate}, header: {correct_headers / len(headers)}, api: {correct_apis / len(apis)}")
+        return passrate*100 + (correct_headers / len(headers))*10 + (correct_apis / len(apis))
 def main():
 
     # Create search space
@@ -850,11 +1049,11 @@ def main():
     
     print("Search space defined:", search_space)
     
-    # run_predefined_workflow_config("workflow_config.json", benchmark, "IoTPilot")
+    run_predefined_workflow_config("workflow_config.json", benchmark, "chatiot")
     
     # LLM_meta_search_for_each(benchmark, 10)
     
-    genetic_search_for_each(benchmark, 10)
+    # genetic_search_for_each(benchmark, 10)
     
 
 if __name__ == "__main__":

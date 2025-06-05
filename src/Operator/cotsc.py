@@ -20,8 +20,8 @@ class CoTSC(BaseOperator):
         temperature (float|None): Temperature parameter for the language model.
         N (int): Number of different reasoning paths to generate (default=5).
     """
-    def __init__(self,model: str,temperature: float=0.5, N:int=5, **kwargs):
-        super().__init__(model=model, temperature=temperature, **kwargs)
+    def __init__(self,model: str,temperature: float=0.5, N:int=1, topk:int=3, **kwargs):
+        super().__init__(model=model, temperature=temperature, topk=topk, **kwargs)
         self.cot_llm = self.get_llm(model, temperature=0.7)
         self.final_llm = self.get_llm(model, temperature=0.1)
         self.system_cot_prompt = f"""
@@ -48,6 +48,10 @@ class CoTSC(BaseOperator):
         
         user_query = f"Here is the problem: {input_text}. Please provide a step-by-step reasoning process to solve the problem."
         
+        if self.topk > 0:
+            response = self.retrieval_run(user_query, self.topk)
+            user_query += f"Here is the reference code: " + str(response)
+            
         all_responses = []
         solution_content = ""
         # Generate N different responses with the same prompt but different temperature
@@ -57,8 +61,8 @@ class CoTSC(BaseOperator):
             messages = [SystemMessage(self.system_cot_prompt), HumanMessage(user_query)]
             response = temp_llm.invoke(messages)
             all_responses.append(response)
-            self._update_cost(messages, response.content)
-            solution_content += f"SOLUTION {i+1}:\n{response.content}\n"
+            self._update_cost(messages, response.content if isinstance(response, BaseMessage) else response)
+            solution_content += f"SOLUTION {i+1}:\n{response.content if isinstance(response, BaseMessage) else response}\n"
         # Synthesize a final answer using all collected responses
         synthesis_prompt = f"""
                             I have generated {self.N} different solutions to this problem using chain-of-thought reasoning.
@@ -72,12 +76,14 @@ class CoTSC(BaseOperator):
                             {input_text}
 
                             Provide a clear, step-by-step reasoning process for this final solution.
+                            You must wrap the final answer with ```.
                             """
+            
         # Use a lower temperature for the final synthesis to ensure stability
         final_llm = self.final_llm
         messages = [SystemMessage(self.system_final_prompt), HumanMessage(synthesis_prompt)]
         final_response = final_llm.invoke(messages)
-        self._update_cost(messages, final_response.content)
+        self._update_cost(messages, final_response.content if isinstance(final_response, BaseMessage) else final_response)
         return final_response
      
 

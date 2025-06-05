@@ -19,8 +19,8 @@ class Reflexion(BaseOperator):
         temperature (float|None): Temperature parameter for the language model.
         max_iterations (int): Maximum number of reflection iterations (default=3).
     """
-    def __init__(self, model: str, temperature: float=0.5, max_iterations: int=3, **kwargs):
-        super().__init__(model=model, temperature=temperature, **kwargs)
+    def __init__(self, model: str, temperature: float=0.5, max_iterations: int=3, topk: int=3, **kwargs):
+        super().__init__(model=model, temperature=temperature, topk=topk, **kwargs)
         self.initial_llm = self.get_llm(model, temperature=temperature)
         self.reflect_llm = self.get_llm(model, temperature=0.3)  # Lower temperature for stable reflections
         self.system_initial_prompt = """
@@ -67,11 +67,14 @@ class Reflexion(BaseOperator):
         
         # First round: Generate initial solution
         user_query = f"Problem: {input_text}\n\nPlease provide a detailed step-by-step analysis to solve this problem."
-        
+        if self.topk > 0:
+            response = self.retrieval_run(user_query, self.topk)
+            user_query += f"Here is the reference code: " + str(response)
+          
         messages = [SystemMessage(self.system_initial_prompt), HumanMessage(user_query)]
         current_solution = self.initial_llm.invoke(messages)
-        response_id = current_solution.response_metadata['id']
-        self._update_cost(messages, current_solution.content)
+        # response_id = current_solution.response_metadata['id']
+        self._update_cost(messages, current_solution.content if isinstance(current_solution, BaseMessage) else current_solution)
         
         # Subsequent rounds: Reflection and improvement
         for i in range(self.max_iterations - 1):
@@ -82,7 +85,7 @@ class Reflexion(BaseOperator):
 
                                 My solution was:
 
-                                {current_solution.content}
+                                {current_solution.content if isinstance(current_solution, BaseMessage) else current_solution}
 
                                 Please evaluate this solution:
                                 1. What parts are correct?
@@ -97,7 +100,7 @@ class Reflexion(BaseOperator):
             messages.extend([current_solution]+new_messages)
             improved_solution = self.reflect_llm.invoke(messages)
             # response_id = improved_solution.response_metadata['id']
-            self._update_cost(messages, improved_solution.content)
+            self._update_cost(messages, improved_solution.content if isinstance(improved_solution, BaseMessage) else improved_solution)
             
             # Set improved solution as current for next iteration
             current_solution = improved_solution
@@ -108,11 +111,12 @@ class Reflexion(BaseOperator):
 
                         After several iterations of thinking and improvement, I need to provide a final, comprehensive solution.
                         Please synthesize all previous thinking and provide a concise yet thorough final answer, ensuring the solution is correct, efficient, and easy to understand.
+                        You must wrap the final answer with ```.
                         """
         new_messages = [SystemMessage(self.system_final_prompt), HumanMessage(final_prompt)]
         messages.extend([current_solution]+new_messages)
         final_solution = self.reflect_llm.invoke(messages)
-        self._update_cost(messages, final_solution.content)
+        self._update_cost(messages, final_solution.content if isinstance(final_solution, BaseMessage) else final_solution)
         
         return final_solution
 

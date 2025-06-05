@@ -1,0 +1,3263 @@
+[
+    {
+        "id": 1,
+        "area": "bathroom",
+        "type": "multi-functional-device",
+        "services": {
+            "light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint32",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        1
+                    ]
+                },
+                "mode": {
+                    "description": "Lighting Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Normal"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Night Light"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Eco Mode"
+                        }
+                    ]
+                },
+                "brightness-delta": {
+                    "description": "Adjust Brightness",
+                    "format": "int8",
+                    "access": [
+                        "write"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        -100,
+                        100,
+                        1
+                    ]
+                },
+                "ct-delta": {
+                    "description": "Adjust Color Temperature",
+                    "format": "int8",
+                    "access": [
+                        "write"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        -100,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "motion-sensor": {
+                "motion-state": {
+                    "description": "Motion State",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "sensitivity": {
+                    "description": "Motion Sensitivity",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "timeout": {
+                    "description": "Motion Detection Timeout",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "seconds",
+                    "value-range": [
+                        10,
+                        600,
+                        1
+                    ]
+                }
+            },
+            "humidity-sensor": {
+                "humidity": {
+                    "description": "Humidity Level",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                },
+                "threshold": {
+                    "description": "Humidity Threshold",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        20.0,
+                        80.0,
+                        0.1
+                    ]
+                }
+            },
+            "temperature-sensor": {
+                "temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        50.0,
+                        0.1
+                    ]
+                },
+                "threshold": {
+                    "description": "Temperature Threshold",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        10.0,
+                        40.0,
+                        0.1
+                    ]
+                }
+            },
+            "ventilation-fan": {
+                "on": {
+                    "description": "Fan Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "speed": {
+                    "description": "Fan Speed",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "auto-mode": {
+                    "description": "Automatic Mode",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 2,
+        "area": "bedroom",
+        "type": "multi-functional-device",
+        "services": {
+            "air-conditioner": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "mode": {
+                    "description": "Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Cooling"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Dry"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Fan"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Dehumidifying"
+                        },
+                        {
+                            "value": 5,
+                            "description": "Heat"
+                        }
+                    ]
+                },
+                "target-temperature": {
+                    "description": "Target Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                "current-temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0,
+                        50,
+                        0.1
+                    ]
+                },
+                "fan-speed": {
+                    "description": "Fan Speed",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "eco": {
+                    "description": "ECO Mode",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "heater": {
+                    "description": "Heater",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "dryer": {
+                    "description": "Dryer",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "sleep-mode": {
+                    "description": "Sleep Mode",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            },
+            "fan-control": {
+                "fan-level": {
+                    "description": "Fan Level",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 0,
+                            "description": "Auto"
+                        },
+                        {
+                            "value": 1,
+                            "description": "Level1"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Level2"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Level3"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Level4"
+                        },
+                        {
+                            "value": 5,
+                            "description": "Level5"
+                        },
+                        {
+                            "value": 6,
+                            "description": "Level6"
+                        },
+                        {
+                            "value": 7,
+                            "description": "Level7"
+                        }
+                    ]
+                },
+                "horizontal-swing": {
+                    "description": "Horizontal Swing",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "vertical-swing": {
+                    "description": "Vertical Swing",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            },
+            "light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint32",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        1
+                    ]
+                },
+                "mode": {
+                    "description": "Lighting Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Normal"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Night Light"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Reading Mode"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Relax Mode"
+                        }
+                    ]
+                }
+            },
+            "curtain": {
+                "open-percentage": {
+                    "description": "Curtain Open Percentage",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "mode": {
+                    "description": "Curtain Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Manual Control"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Automatic (Light Sensor)"
+                        }
+                    ]
+                }
+            },
+            "motion-sensor": {
+                "motion-state": {
+                    "description": "Motion State",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "sensitivity": {
+                    "description": "Motion Sensitivity",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "humidity-sensor": {
+                "humidity": {
+                    "description": "Humidity Level",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                },
+                "threshold": {
+                    "description": "Humidity Threshold",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        20.0,
+                        80.0,
+                        0.1
+                    ]
+                }
+            },
+            "temperature-sensor": {
+                "temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        50.0,
+                        0.1
+                    ]
+                },
+                "threshold": {
+                    "description": "Temperature Threshold",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        10.0,
+                        40.0,
+                        0.1
+                    ]
+                }
+            },
+            "environment": {
+                "temperature": {
+                    "description": "Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        -30,
+                        100,
+                        0.1
+                    ]
+                }
+            },
+            "alarm": {
+                "alarm": {
+                    "description": "Alarm",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            },
+            "indicator-light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            },
+            "maintenance": {
+                "clean": {
+                    "description": "Clean Status",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "notify",
+                        "write"
+                    ]
+                },
+                "examine": {
+                    "description": "Examine Status",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "notify",
+                        "write"
+                    ]
+                },
+                "error": {
+                    "description": "Error Report",
+                    "format": "string",
+                    "access": [
+                        "notify"
+                    ]
+                }
+            },
+            "enhance": {
+                "fan-percent": {
+                    "description": "Fan Speed Percentage",
+                    "format": "uint8",
+                    "access": [
+                        "write",
+                        "read",
+                        "notify"
+                    ],
+                    "value-range": [
+                        1,
+                        101,
+                        1
+                    ]
+                },
+                "timer": {
+                    "description": "Timer Settings",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "notify",
+                        "write"
+                    ]
+                }
+            },
+            "illumination-sensor": {
+                "illumination": {
+                    "description": "Illumination",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "lux",
+                    "value-range": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            "battery": {
+                "battery-level": {
+                    "description": "Battery Level",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "none",
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Normal"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Low"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 3,
+        "area": "living-room",
+        "type": "multi-functional-device",
+        "services": {
+            "tv": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "volume": {
+                    "description": "Volume",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "channel": {
+                    "description": "Channel",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-range": [
+                        1,
+                        999,
+                        1
+                    ]
+                },
+                "input-source": {
+                    "description": "Input Source",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "HDMI1"
+                        },
+                        {
+                            "value": 2,
+                            "description": "HDMI2"
+                        },
+                        {
+                            "value": 3,
+                            "description": "AV"
+                        },
+                        {
+                            "value": 4,
+                            "description": "USB"
+                        }
+                    ]
+                },
+                "mute": {
+                    "description": "Mute Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            },
+            "air-conditioner": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "mode": {
+                    "description": "Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Cooling"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Dry"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Fan"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Dehumidifying"
+                        },
+                        {
+                            "value": 5,
+                            "description": "Heat"
+                        }
+                    ]
+                },
+                "target-temperature": {
+                    "description": "Target Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                "current-temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0,
+                        50,
+                        0.1
+                    ]
+                },
+                "fan-speed": {
+                    "description": "Fan Speed",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint32",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        1
+                    ]
+                },
+                "mode": {
+                    "description": "Lighting Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Normal"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Night Light"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Reading Mode"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Relax Mode"
+                        }
+                    ]
+                }
+            },
+            "curtain": {
+                "open-percentage": {
+                    "description": "Curtain Open Percentage",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "mode": {
+                    "description": "Curtain Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Manual Control"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Automatic (Light Sensor)"
+                        }
+                    ]
+                }
+            },
+            "speaker": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "volume": {
+                    "description": "Volume",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "input-source": {
+                    "description": "Input Source",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Bluetooth"
+                        },
+                        {
+                            "value": 2,
+                            "description": "AUX"
+                        },
+                        {
+                            "value": 3,
+                            "description": "USB"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Wi-Fi"
+                        }
+                    ]
+                }
+            },
+            "motion-sensor": {
+                "motion-state": {
+                    "description": "Motion State",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "sensitivity": {
+                    "description": "Motion Sensitivity",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "humidity-sensor": {
+                "humidity": {
+                    "description": "Humidity Level",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                }
+            },
+            "temperature-sensor": {
+                "temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        50.0,
+                        0.1
+                    ]
+                }
+            },
+            "indicator-light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 4,
+        "area": "study-room",
+        "type": "multi-functional-device",
+        "services": {
+            "desk-lamp": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint32",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        1
+                    ]
+                },
+                "mode": {
+                    "description": "Lighting Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Reading Mode"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Relax Mode"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Focus Mode"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Night Light"
+                        }
+                    ]
+                }
+            },
+            "air-conditioner": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "mode": {
+                    "description": "Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Cooling"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Dry"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Fan"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Dehumidifying"
+                        },
+                        {
+                            "value": 5,
+                            "description": "Heat"
+                        }
+                    ]
+                },
+                "target-temperature": {
+                    "description": "Target Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        16,
+                        31,
+                        0.5
+                    ]
+                },
+                "current-temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0,
+                        50,
+                        0.1
+                    ]
+                },
+                "fan-speed": {
+                    "description": "Fan Speed",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "humidifier": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "humidity-level": {
+                    "description": "Target Humidity Level",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        30.0,
+                        80.0,
+                        0.1
+                    ]
+                },
+                "current-humidity": {
+                    "description": "Current Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                },
+                "water-level": {
+                    "description": "Water Tank Level",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "smart-speaker": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "volume": {
+                    "description": "Volume",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "input-source": {
+                    "description": "Input Source",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Bluetooth"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Wi-Fi"
+                        },
+                        {
+                            "value": 3,
+                            "description": "AUX"
+                        }
+                    ]
+                },
+                "assistant-activation": {
+                    "description": "Voice Assistant Activation",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            },
+            "computer": {
+                "on": {
+                    "description": "Power Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "screen-status": {
+                    "description": "Screen Status (On/Off)",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "volume": {
+                    "description": "System Volume",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "brightness": {
+                    "description": "Screen Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "current-application": {
+                    "description": "Current Active Application",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "cpu-usage": {
+                    "description": "CPU Usage",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "memory-usage": {
+                    "description": "Memory Usage",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "motion-sensor": {
+                "motion-state": {
+                    "description": "Motion State",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "sensitivity": {
+                    "description": "Motion Sensitivity",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "temperature-sensor": {
+                "temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        50.0,
+                        0.1
+                    ]
+                }
+            },
+            "indicator-light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 5,
+        "area": "gym",
+        "type": "multi-functional-fitness-area",
+        "services": {
+            "treadmill": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "speed": {
+                    "description": "Speed",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "km/h",
+                    "value-range": [
+                        0,
+                        20,
+                        0.1
+                    ]
+                },
+                "incline": {
+                    "description": "Incline",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        15,
+                        1
+                    ]
+                },
+                "calories-burned": {
+                    "description": "Calories Burned",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "kcal",
+                    "value-range": [
+                        0,
+                        2000,
+                        0.1
+                    ]
+                },
+                "distance": {
+                    "description": "Distance Covered",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "km",
+                    "value-range": [
+                        0,
+                        50,
+                        0.01
+                    ]
+                }
+            },
+            "exercise-bike": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "speed": {
+                    "description": "Speed",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "km/h",
+                    "value-range": [
+                        0,
+                        50,
+                        0.1
+                    ]
+                },
+                "resistance-level": {
+                    "description": "Resistance Level",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-range": [
+                        0,
+                        10,
+                        1
+                    ]
+                },
+                "calories-burned": {
+                    "description": "Calories Burned",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "kcal",
+                    "value-range": [
+                        0,
+                        2000,
+                        0.1
+                    ]
+                },
+                "distance": {
+                    "description": "Distance Covered",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "km",
+                    "value-range": [
+                        0,
+                        100,
+                        0.01
+                    ]
+                }
+            },
+            "smart-fitness-mirror": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "workout-mode": {
+                    "description": "Workout Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Yoga"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Strength Training"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Cardio"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Stretching"
+                        }
+                    ]
+                },
+                "current-session-duration": {
+                    "description": "Current Session Duration",
+                    "format": "uint32",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "seconds",
+                    "value-range": [
+                        0,
+                        3600,
+                        1
+                    ]
+                },
+                "heart-rate": {
+                    "description": "Heart Rate",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "bpm",
+                    "value-range": [
+                        40,
+                        200,
+                        1
+                    ]
+                }
+            },
+            "weight-lifting-station": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "weight": {
+                    "description": "Selected Weight",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kg",
+                    "value-range": [
+                        0,
+                        200,
+                        1
+                    ]
+                },
+                "reps": {
+                    "description": "Repetitions",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "sets": {
+                    "description": "Sets Completed",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "value-range": [
+                        0,
+                        20,
+                        1
+                    ]
+                }
+            },
+            "environment-monitor": {
+                "temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        50.0,
+                        0.1
+                    ]
+                },
+                "humidity": {
+                    "description": "Current Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                },
+                "air-quality": {
+                    "description": "Air Quality Index",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "value-range": [
+                        0,
+                        500,
+                        1
+                    ]
+                }
+            },
+            "indicator-light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "color": {
+                    "description": "Light Color",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Red"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Green"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Blue"
+                        },
+                        {
+                            "value": 4,
+                            "description": "White"
+                        }
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 6,
+        "area": "balcony",
+        "type": "multi-functional-balcony-area",
+        "services": {
+            "illumination-sensor": {
+                "illumination": {
+                    "description": "Illumination",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "lux",
+                    "value-range": [
+                        0,
+                        83000,
+                        1
+                    ]
+                }
+            },
+            "temperature-humidity-sensor": {
+                "temperature": {
+                    "description": "Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        -40.0,
+                        85.0,
+                        0.1
+                    ]
+                },
+                "humidity": {
+                    "description": "Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                }
+            },
+            "automatic-irrigation-system": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "water-flow-rate": {
+                    "description": "Water Flow Rate",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "liters/minute",
+                    "value-range": [
+                        0.0,
+                        10.0,
+                        0.1
+                    ]
+                },
+                "schedule": {
+                    "description": "Irrigation Schedule",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-example": "08:00-09:00"
+                },
+                "soil-moisture": {
+                    "description": "Soil Moisture Level",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                }
+            },
+            "wind-speed-sensor": {
+                "wind-speed": {
+                    "description": "Wind Speed",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "m/s",
+                    "value-range": [
+                        0.0,
+                        50.0,
+                        0.1
+                    ]
+                }
+            },
+            "air-quality-monitor": {
+                "pm2.5": {
+                    "description": "PM2.5 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "pm10": {
+                    "description": "PM10 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "co2": {
+                    "description": "CO2 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ppm",
+                    "value-range": [
+                        400.0,
+                        5000.0,
+                        1.0
+                    ]
+                }
+            },
+            "indicator-light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "color": {
+                    "description": "Light Color",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Red"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Green"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Blue"
+                        },
+                        {
+                            "value": 4,
+                            "description": "White"
+                        }
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 7,
+        "area": "kitchen",
+        "type": "multi-functional-kitchen-area",
+        "services": {
+            "smoke-detector": {
+                "smoke-detected": {
+                    "description": "Smoke Detected",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                }
+            },
+            "gas-leak-detector": {
+                "gas-leak-detected": {
+                    "description": "Gas Leak Detected",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "gas-concentration": {
+                    "description": "Gas Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ppm",
+                    "value-range": [
+                        0.0,
+                        10000.0,
+                        1.0
+                    ]
+                }
+            },
+            "range-hood": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "fan-speed": {
+                    "description": "Fan Speed",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-range": [
+                        0,
+                        3,
+                        1
+                    ],
+                    "value-list": [
+                        {
+                            "value": 0,
+                            "description": "Off"
+                        },
+                        {
+                            "value": 1,
+                            "description": "Low"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Medium"
+                        },
+                        {
+                            "value": 3,
+                            "description": "High"
+                        }
+                    ]
+                },
+                "air-quality": {
+                    "description": "Air Quality in Kitchen",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ppm",
+                    "value-range": [
+                        0.0,
+                        5000.0,
+                        0.1
+                    ]
+                }
+            },
+            "temperature-humidity-sensor": {
+                "temperature": {
+                    "description": "Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        -40.0,
+                        85.0,
+                        0.1
+                    ]
+                },
+                "humidity": {
+                    "description": "Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                }
+            },
+            "kitchen-lighting": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        100
+                    ]
+                }
+            },
+            "smart-oven": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "current-temperature": {
+                    "description": "Current Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        300.0,
+                        1.0
+                    ]
+                },
+                "target-temperature": {
+                    "description": "Target Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        0.0,
+                        300.0,
+                        1.0
+                    ]
+                },
+                "cooking-mode": {
+                    "description": "Cooking Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Bake"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Grill"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Defrost"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Keep Warm"
+                        }
+                    ]
+                },
+                "timer": {
+                    "description": "Cooking Timer",
+                    "format": "uint32",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "seconds",
+                    "value-range": [
+                        0,
+                        7200,
+                        1
+                    ]
+                }
+            },
+            "air-quality-monitor": {
+                "pm2.5": {
+                    "description": "PM2.5 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "pm10": {
+                    "description": "PM10 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "co2": {
+                    "description": "CO2 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ppm",
+                    "value-range": [
+                        400.0,
+                        5000.0,
+                        1.0
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 8,
+        "area": "hall",
+        "type": "multi-functional-hall-area",
+        "services": {
+            "light": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        100
+                    ]
+                },
+                "color": {
+                    "description": "Light Color",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Red"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Green"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Blue"
+                        },
+                        {
+                            "value": 4,
+                            "description": "White"
+                        }
+                    ]
+                }
+            },
+            "temperature-humidity-sensor": {
+                "temperature": {
+                    "description": "Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        -40.0,
+                        85.0,
+                        0.1
+                    ]
+                },
+                "humidity": {
+                    "description": "Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                }
+            },
+            "air-quality-monitor": {
+                "pm2.5": {
+                    "description": "PM2.5 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "pm10": {
+                    "description": "PM10 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "co2": {
+                    "description": "CO2 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ppm",
+                    "value-range": [
+                        400.0,
+                        5000.0,
+                        1.0
+                    ]
+                }
+            },
+            "smart-curtain": {
+                "on": {
+                    "description": "Curtain Open/Close Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "position": {
+                    "description": "Curtain Position",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "ambient-speaker": {
+                "on": {
+                    "description": "Speaker Power Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "volume": {
+                    "description": "Speaker Volume",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "playback-mode": {
+                    "description": "Playback Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Music"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Podcast"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Radio"
+                        }
+                    ]
+                }
+            },
+            "security-camera": {
+                "on": {
+                    "description": "Camera Power Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "recording": {
+                    "description": "Recording Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "motion-detected": {
+                    "description": "Motion Detected",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                }
+            },
+            "smart-doorbell": {
+                "ring": {
+                    "description": "Doorbell Ring",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                },
+                "video-stream": {
+                    "description": "Video Stream URL",
+                    "format": "string",
+                    "access": [
+                        "read"
+                    ],
+                    "value-example": "http://example.com/stream"
+                },
+                "visitor-detected": {
+                    "description": "Visitor Detected",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 9,
+        "area": "showroom",
+        "type": "multi-functional-showroom-area",
+        "services": {
+            "display-panel": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "content": {
+                    "description": "Displayed Content",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "resolution": {
+                    "description": "Screen Resolution",
+                    "format": "string",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "value-example": "1920x1080"
+                }
+            },
+            "lighting": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        100
+                    ]
+                },
+                "scene-mode": {
+                    "description": "Lighting Scene Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Presentation"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Relaxation"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Spotlight"
+                        },
+                        {
+                            "value": 4,
+                            "description": "Custom"
+                        }
+                    ]
+                }
+            },
+            "temperature-humidity-sensor": {
+                "temperature": {
+                    "description": "Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        -40.0,
+                        85.0,
+                        0.1
+                    ]
+                },
+                "humidity": {
+                    "description": "Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                }
+            },
+            "ambient-speaker": {
+                "on": {
+                    "description": "Speaker Power Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "volume": {
+                    "description": "Speaker Volume",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                },
+                "playback-mode": {
+                    "description": "Playback Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Music"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Announcement"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Ambient Sound"
+                        }
+                    ]
+                }
+            },
+            "air-quality-monitor": {
+                "pm2.5": {
+                    "description": "PM2.5 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "pm10": {
+                    "description": "PM10 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "\u03bcg/m\u00b3",
+                    "value-range": [
+                        0.0,
+                        500.0,
+                        0.1
+                    ]
+                },
+                "co2": {
+                    "description": "CO2 Concentration",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ppm",
+                    "value-range": [
+                        400.0,
+                        5000.0,
+                        1.0
+                    ]
+                }
+            },
+            "smart-curtain": {
+                "on": {
+                    "description": "Curtain Open/Close Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "position": {
+                    "description": "Curtain Position",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "security-camera": {
+                "on": {
+                    "description": "Camera Power Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "recording": {
+                    "description": "Recording Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "motion-detected": {
+                    "description": "Motion Detected",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": 10,
+        "area": "garage",
+        "type": "multi-functional-garage-area",
+        "services": {
+            "car-charger": {
+                "charging": {
+                    "description": "Charging Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "current": {
+                    "description": "Current",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "ampere",
+                    "value-range": [
+                        0,
+                        32,
+                        0.1
+                    ]
+                },
+                "voltage": {
+                    "description": "Voltage",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "volt",
+                    "value-range": [
+                        0,
+                        240,
+                        0.1
+                    ]
+                },
+                "energy": {
+                    "description": "Energy Consumed",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "kWh",
+                    "value-range": [
+                        0,
+                        99999,
+                        0.1
+                    ]
+                },
+                "charging-mode": {
+                    "description": "Charging Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Fast Charging"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Standard Charging"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Eco Charging"
+                        }
+                    ]
+                }
+            },
+            "environment-monitor": {
+                "temperature": {
+                    "description": "Temperature",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "celsius",
+                    "value-range": [
+                        -40.0,
+                        85.0,
+                        0.1
+                    ]
+                },
+                "humidity": {
+                    "description": "Humidity",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0.0,
+                        100.0,
+                        0.1
+                    ]
+                },
+                "air-quality": {
+                    "description": "Air Quality Index (AQI)",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "value-range": [
+                        0,
+                        500,
+                        1
+                    ]
+                }
+            },
+            "garage-door": {
+                "open": {
+                    "description": "Door Open/Close Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "lock": {
+                    "description": "Door Lock Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "position": {
+                    "description": "Door Position",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        0,
+                        100,
+                        1
+                    ]
+                }
+            },
+            "security-camera": {
+                "on": {
+                    "description": "Camera Power Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "recording": {
+                    "description": "Recording Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "motion-detected": {
+                    "description": "Motion Detected",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "notify"
+                    ]
+                }
+            },
+            "lighting": {
+                "on": {
+                    "description": "Switch Status",
+                    "format": "bool",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ]
+                },
+                "brightness": {
+                    "description": "Brightness",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "percentage",
+                    "value-range": [
+                        1,
+                        100,
+                        1
+                    ]
+                },
+                "color-temperature": {
+                    "description": "Color Temperature",
+                    "format": "uint16",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "unit": "kelvin",
+                    "value-range": [
+                        2700,
+                        6500,
+                        100
+                    ]
+                }
+            },
+            "parking-assistance": {
+                "distance-to-obstacle": {
+                    "description": "Distance to Obstacle",
+                    "format": "float",
+                    "access": [
+                        "read",
+                        "notify"
+                    ],
+                    "unit": "meter",
+                    "value-range": [
+                        0.0,
+                        10.0,
+                        0.1
+                    ]
+                },
+                "guidance-mode": {
+                    "description": "Parking Guidance Mode",
+                    "format": "uint8",
+                    "access": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "value-list": [
+                        {
+                            "value": 1,
+                            "description": "Visual Guidance"
+                        },
+                        {
+                            "value": 2,
+                            "description": "Audio Guidance"
+                        },
+                        {
+                            "value": 3,
+                            "description": "Automatic Parking"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]

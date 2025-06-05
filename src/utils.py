@@ -5,12 +5,77 @@ from config import *
 import re
 import json
 import os
+
+import paramiko
+import json
+from langchain_core.messages import HumanMessage, SystemMessage, BaseMessage
+
+class myllm:
+    def __init__(self, model: str, temperature: float = 0.5, **kwargs):
+        self.model = model
+        self.temperature = temperature
+        self.ssh_host = "10.214.149.209"
+        self.ssh_port = 14000
+        self.ssh_username = "root"
+        self.ssh_password = "wop"
+        self.api_endpoint = "http://localhost:11434/api/generate"
+
+        
+
+    def invoke(self, messages):
+        import json
+        import shlex
+
+        # Step 1: Convert messages to string and safely escape for JSON
+        combined_prompt = str(messages)
+        safe_prompt = json.dumps(combined_prompt, ensure_ascii=False)
+
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        try:
+            ssh.connect(
+                hostname=self.ssh_host,
+                port=self.ssh_port,
+                username=self.ssh_username,
+                password=self.ssh_password
+            )
+
+            # 构造原始命令
+            raw_data = f'{{"model": "{self.model}", "prompt": {safe_prompt}, "stream": false}}'
+
+            # 使用 shlex.quote 确保整个字符串在 shell 中安全
+            safe_data = shlex.quote(raw_data)
+
+            # 构造最终 curl 命令
+            curl_command = f"curl --location --request POST '{self.api_endpoint}' " \
+                            f"--header 'Content-Type: application/json' " \
+                            f"--data-raw {safe_data}"
+
+            stdin, stdout, stderr = ssh.exec_command(curl_command)
+
+            output = stdout.read().decode()
+            error = stderr.read().decode()
+            try:
+                response_json = json.loads(output)
+            except json.JSONDecodeError:
+                print("Failed to parse JSON response")
+                return ""
+
+            response = response_json.get("response", "")
+            return response
+
+        finally:
+            ssh.close()
+
+
 def get_llm(model: str, temperature: float = 0)->Union[ChatOpenAI,None]:
     if model not in CANDIATE_MODEL:
         raise ValueError(f"Model {model} is not supported. Supported models are: {CANDIATE_MODEL}")
     elif model in ["gpt-4o", "gpt-3.5-turbo", "gpt-4o-mini"]:
         llm = ChatOpenAI(model="gpt-4o", temperature=temperature, base_url=OPENAI_BASE_URL, api_key=SecretStr(OPENAI_KEY))
-
+    elif model in ["deepseek-r1:1.5b", "deepseek-r1:7b", "deepseek-r1:13b"]:
+        llm = myllm(model=model, temperature=temperature)
     return llm
 
 def extract_module_code(text: str) -> list:
@@ -44,10 +109,10 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from matplotlib.patches import Rectangle
 
-def draw_all_individuals_topology(generation_results, evolution_dir, generation):
+def draw_all_individuals_topology(code_name, generation_results, evolution_dir, generation):
     
     """
-    绘制每个 individual 的 workflow_topology，每个 individual 单独作为一个 subfigure。
+    绘制每个 individual 的 workflow_topology, 每个 individual 单独作为一个 subfigure。
     
     参数:
         generation_results (dict): 包含个体结果的数据，格式为 {"individual_0": {...}, ...}
@@ -84,8 +149,9 @@ def draw_all_individuals_topology(generation_results, evolution_dir, generation)
 
     for idx, (individual_name, individual_data) in enumerate(individuals.items()):
         ax = axes[idx]
-        topo = individual_data.get('motion_sensor_80', {}).get('workflow_topology', {})
-        cost_info = individual_data.get('motion_sensor_80', {}).get('total_cost_info', {})
+        topo = individual_data.get(code_name, {}).get('workflow_topology', {})
+        cost_info = individual_data.get(code_name, {}).get('total_cost_info', {})
+        code_quality = individual_data.get(code_name, {}).get('code_quality', 0)
 
 
         G = nx.DiGraph()
@@ -141,17 +207,16 @@ def draw_all_individuals_topology(generation_results, evolution_dir, generation)
         ax.set_title(
             f"{individual_name}\n"
             f"Input: {input_tk}, Output: {output_tk}\n"
-            f"Time: {time_cost}",
+            f"Time: {time_cost}\n"
+            f"code_quality: {code_quality}",
             fontsize=10, pad=20
         )
 
         ax.axis('on')
 
-    # 自动调整子图间距
     plt.tight_layout()
-    # plt.subplots_adjust(wspace=0.)  # 可选：微调子图间距
+    # plt.subplots_adjust(wspace=0.)  
 
-    # 保存图像
     os.makedirs(evolution_dir, exist_ok=True)
     save_topology = os.path.join(evolution_dir, f"topology_{generation + 1}.pdf")
     plt.savefig(save_topology, format='pdf', bbox_inches='tight')

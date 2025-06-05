@@ -19,7 +19,34 @@
             "next": ["end"]
         }
 
-    }
+    },
 
+    "ensemble":{
+        "ensemble": {
+            "type": "ensemble",
+            "params": {"model": "deepseek-r1:7b", "temperature": 0.5},
+            "next": ["end"]
+        }
+    },
+
+    "cot":{
+        "reviewer": {
+            "type": "reviewer",
+            "params": {"model": "gpt-4o", "temperature": 0.5},
+            "next": ["end"]
+        }
+    },
     
+    "retrieval":{
+        "retrieval": {
+            "type": "retrieval",
+            "params": {"model": "bge-m3", "temperature": 0.5},
+            "next": ["cot"]
+        },
+        "cot": {
+            "type": "cot",
+            "params": {"model": "gpt-4o", "temperature": 0.5},
+            "next": ["end"]
+        }
+    }
 }

@@ -8,8 +8,8 @@ from Operator import BaseOperator
 from utils import extract_module_code
 
 class CoT(BaseOperator):
-    def __init__(self,model: str,temperature: float=0.5, **kwargs):
-        super().__init__(model=model, temperature=temperature, **kwargs)
+    def __init__(self,model: str,temperature: float=0.5, topk: int=3,  **kwargs):
+        super().__init__(model=model, temperature=temperature, topk=topk, **kwargs)
         self.llm = self.get_llm(model, temperature)
         self.system_prompt = f"""
                             You are a programming assistant that solves problems step by step.        
@@ -28,12 +28,17 @@ class CoT(BaseOperator):
         input_text = query
         if input_text is None:
             raise ValueError("No input provided. Please provide input during initialization or in the run method.")
+
+           
+        user_query = f"Here is the problem: {input_text}. Please provide a step-by-step reasoning process to solve the problem. You must wrap the final answer with ```."
         
-        user_query = f"Here is the problem: {input_text}. Please provide a step-by-step reasoning process to solve the problem."
-        
+        if self.topk > 0:
+            response = self.retrieval_run(user_query, self.topk)
+            user_query += f"Here is the reference code: " + str(response)
+            
         messages = [SystemMessage(self.system_prompt), HumanMessage(user_query)]
         response = self.llm.invoke(messages)
-        self._update_cost(messages, response.content)
+        self._update_cost(messages, response.content if isinstance(response, BaseMessage) else response)
         return response
      
 

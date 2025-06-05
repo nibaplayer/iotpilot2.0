@@ -11,8 +11,8 @@ import json
 import re
 
 class Reviewer(BaseOperator):
-    def __init__(self,model: str,temperature: float=0.5, assignment: str=None, **kwargs):
-        super().__init__(model, temperature, **kwargs)
+    def __init__(self,model: str,temperature: float=0.5, assignment: str=None, topk:int=3, **kwargs):
+        super().__init__(model, temperature, topk, **kwargs)
         self.llm = self.get_llm(model, temperature)
         self._cost = {"input_token": 0, "output_tokens":0,"time": 0}
         self.assignment = assignment # Type of the reviewer, can be "RIOT", "IFTTT", "Python" so on. Default is None. If None, the reviewer will use LLM to determine the type.
@@ -27,10 +27,7 @@ class Reviewer(BaseOperator):
         if self.assignment is None:
             # Use LLM to determine the type of the reviewer
             # DPO
-            self.assignment = "Python"
-
-
-        
+            self.assignment = "RIOT"
 
         if  self.assignment == "Python":
             # 规范输入，从raw_code中提取代码，暂时忽略安全问题
@@ -67,9 +64,9 @@ class Reviewer(BaseOperator):
             {result}
             Please provide your review in a concise manner. In the end, please also provide a corrected version of the code.
             """
-            messages = [SystemMessage(system_prompt), HumanMessage(human_prompt)]
+            messages = [SystemMessage(system_prompt), HumanMessage(human_prompt+"You must wrap the final answer with ```")]
             response = self.llm.invoke(messages)
-            self._update_cost(messages,response.content)
+            self._update_cost(messages,response.content if isinstance(response, BaseMessage) else response)
         elif self.assignment == "RIOT":
             # 规范输入，从raw_code中提取代码，暂时忽略安全问题
             code_list = extract_module_code(query)
@@ -110,64 +107,64 @@ class Reviewer(BaseOperator):
             {result}
             Please provide your review in a concise manner. In the end, please also provide a corrected version of the code.
             """
-            messages = [SystemMessage(system_prompt), HumanMessage(human_prompt)]
+            
+            if self.topk > 0:
+                response = self.retrieval_run(human_prompt, self.topk)
+                human_prompt += f"Here is the reference code: " + str(response)
+            
+            messages = [SystemMessage(system_prompt), HumanMessage(human_prompt+"You must wrap the final answer with ```")]
             response = self.llm.invoke(messages)
-            self._update_cost(messages,response.content)
+            self._update_cost(messages,response.content if isinstance(response, BaseMessage) else response)
         elif self.assignment == "IFTTT":
-            # 规范输入，从raw_code中IFTTT的json
-            # Extract JSON content from the raw_code
+            result = Executor.ifttt_executor(query)
+            system_prompt = """
+            You are an expert IFTTT applet reviewer with deep knowledge of IoT integrations and automation workflows. 
+            Your task is to analyze the following IFTTT applet configuration and provide professional feedback.
+
+            As an IFTTT specialist, you should analyze:
+            1. Correctness - Is the applet configuration valid and will it work as intended?
+            2. Efficiency - Is the automation optimized for its purpose?
+            3. Logic - Does the trigger-action relationship make sense for the intended use case?
+            4. Safety - Are there any potential issues with the triggers or actions?
+            5. Completeness - Does the implementation satisfy all requirements?
+
+            Your review should include:
+            - Identification of any configuration issues
+            - Analysis of the trigger-action relationship
+            - Suggestions for improvement or optimization
+            - Explanation of any IFTTT-specific concerns
+            - A corrected and improved version of the configuration if necessary
+            """
+
+            human_prompt = f"""
+            I have a task where I asked you to generate an IFTTT applet configuration based on my requirements. 
+            You provided a solution, which I then executed and obtained some results. Now, I would like you to:
+
+            1. Review the IFTTT configuration based on the execution results
+            2. Identify any issues or inefficiencies in the configuration
+            3. Explain what worked well and what didn't work as expected
+            4. Suggest improvements or optimizations
+
+            Here is the task:
+            {query}
+            Here is the execution result:
+            {result}
+            your output should be a json format like this:
+            {{
+                "Thought": "Explanation of how the TAP was generated.",
+                "Action_type": "Either 'AskUser' or 'Finish'.",
+                "Say_to_user": "Natural language response to the user.",
+                "TAP": {{
+                    "trigger": "...",
+                    "condition": "...",
+                    "action": "..."
+                }}
+            }}
+            """
+            messages = [SystemMessage(system_prompt), HumanMessage(human_prompt+"You must wrap the final answer with ```")]
+            response = self.llm.invoke(messages)
+            self._update_cost(messages,response.content if isinstance(response, BaseMessage) else response)
             
-            # Try to find JSON content using regex pattern matching
-            json_pattern = re.compile(r'({[\s\S]*})') # greedy match for JSON-like structures
-            match = json_pattern.search(query)
-
-            if match:
-                code = match.group(1)
-                try:
-                    # Validate the extracted content is valid JSON
-                    json.loads(code)  # Just validate, but keep the original string
-                except json.JSONDecodeError:
-                    raise ValueError("Invalid JSON format found in the input. Please provide valid IFTTT JSON.")
-            else:
-                raise ValueError("No JSON content found in the input query. Please provide valid IFTTT JSON.")
-            result = Executor.ifttt_executor(code)
-            # system_prompt = """
-            # You are an expert IFTTT applet reviewer with deep knowledge of IoT integrations and automation workflows. 
-            # Your task is to analyze the following IFTTT applet configuration and provide professional feedback.
-
-            # As an IFTTT specialist, you should analyze:
-            # 1. Correctness - Is the applet configuration valid and will it work as intended?
-            # 2. Efficiency - Is the automation optimized for its purpose?
-            # 3. Logic - Does the trigger-action relationship make sense for the intended use case?
-            # 4. Safety - Are there any potential issues with the triggers or actions?
-            # 5. Completeness - Does the implementation satisfy all requirements?
-
-            # Your review should include:
-            # - Identification of any configuration issues
-            # - Analysis of the trigger-action relationship
-            # - Suggestions for improvement or optimization
-            # - Explanation of any IFTTT-specific concerns
-            # - A corrected and improved version of the configuration if necessary
-            # """
-
-            # human_prompt = f"""
-            # I have a task where I asked you to generate an IFTTT applet configuration based on my requirements. 
-            # You provided a solution, which I then executed and obtained some results. Now, I would like you to:
-
-            # 1. Review the IFTTT configuration based on the execution results
-            # 2. Identify any issues or inefficiencies in the configuration
-            # 3. Explain what worked well and what didn't work as expected
-            # 4. Suggest improvements or optimizations
-
-            # Here is the original task:
-            # {query}
-
-            # Here is the IFTTT configuration:
-            # {code}
-            # """
-            
-
-
         return response
      
 class Executor():
@@ -278,18 +275,16 @@ class Executor():
 
 
     @staticmethod
-    def ifttt_executor(json_code:str):
-        # json_code is a json string
-            parsed = json.loads(json_code)
-            required_keys = ["Thought", "Say_to_user", "Action_type"]
-            missing_keys = []
-            for key in required_keys:
-                if key not in parsed:
-                    missing_keys.append(key)
-            if missing_keys:
-                return "Error: Missing required keys: {}".format(", ".join(missing_keys))
-            else:
-                return "IFTTT JSON is valid and contains all required fields (Thought, Say_to_user, Action_type). Please review the content to determine if it satisfies the specific task requirements."
+    def ifttt_executor(code:str):
+        required_keys = ["Thought", "Say_to_user", "Action_type"]
+        missing_keys = []
+        for key in required_keys:
+            if key not in code:
+                missing_keys.append(key)
+        if missing_keys:
+            return "Error: Missing required keys: {}".format(", ".join(missing_keys))
+        else:
+            return "IFTTT JSON is valid and contains all required fields (Thought, Say_to_user, Action_type). Please review the content to determine if it satisfies the specific task requirements."
 
 if __name__ == "__main__":
     
